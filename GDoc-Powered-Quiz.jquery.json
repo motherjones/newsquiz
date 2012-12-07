@@ -1,0 +1,33 @@
+{
+  "name": "GDoc-Powered-Quiz",
+  "title": "GDoc Powered Quiz",
+  "description": "Creates a quiz from a google spreadsheet.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/motherjones/GDoc-Powered-Quiz",
+  "author": {
+    "name": "Ben Breedlove",
+    "email": "benbreedlove@gmail.com",
+    "url": "http://www.motherjones.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/motherjones/GDoc-Powered-Quiz.git"
+  },
+  "bugs": {
+    "url": "https://github.com/motherjones/GDoc-Powered-Quiz/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/motherjones/GDoc-Powered-Quiz/blob/master/LICENSE-MIT"
+    },
+    {
+      "type": "GPL",
+      "url": "https://github.com/motherjones/GDoc-Powered-Quiz/blob/master/LICENSE-GPL"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">= 1.6"
+  },
+  "keywords": []
+}
