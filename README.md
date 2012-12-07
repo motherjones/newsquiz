@@ -12,15 +12,23 @@ In your web page:
 
 ```html
 <script src="jquery.js"></script>
+<script src="libs/tabletop.js"></script>
 <script src="dist/GDoc-Powered-Quiz.min.js"></script>
+
+
+<div id="quiz_container"></div>
+
 <script>
 jQuery(function($) {
-  $.awesome(); // "awesome"
+  $('#quiz_container').quiz(YOUR_SPREADSHEET_KEY); //Yeah, the hard part is making the quiz.
 });
 </script>
 ```
 
 ## Documentation
+the spreadsheet powering this should look something like the one here: https://docs.google.com/spreadsheet/pub?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc&output=html
+
+note that the cells labeled "(right|wrong) $number $parameter" will default to "(right|wrong) $parameter" will default to "answer $parameter" 
 _(Coming soon)_
 
 ## Examples
