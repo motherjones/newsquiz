@@ -1,0 +1,38 @@
+.row-fluid {
+	max-width: 630px;
+	margin: 10px;
+}
+
+.span9 {
+	width: 580px;
+	padding: 10px;
+	margin: 10px;
+}
+
+.span4 {
+	width: 150px;
+	background: #eee;
+	padding: 10px;
+	margin: 10px;
+}
+
+.span4:hover {
+	background: #F87467;
+	color: white;
+}
+
+.hide {display: none;}
+
+.show {display: block;}
+
+.question img, .revealed_answer img {
+    max-height: 250px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.quiz_container {
+    margin: 0px;
+    list-style-type: none;
+}
