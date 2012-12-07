@@ -8,7 +8,7 @@
 
 (function($) {
 
-    $.MJ_quiz = function(quiz_data, options) {
+    $.quiz = function(quiz_data, options) {
         var container_elem;
         var that;
         var answer_tracking = [];
@@ -268,10 +268,10 @@
         return quiz.init(quiz_data, options);
     };
 
-    $.fn.MJ_quiz = function(quiz_data, options) {
+    $.fn.quiz = function(quiz_data, options) {
         options = options || {};
         options.container = this.attr('id');
-        this.quiz = $.MJ_quiz(quiz_data, options);
+        this.quiz = $.quiz(quiz_data, options);
         return this;
     };
 }(jQuery));
