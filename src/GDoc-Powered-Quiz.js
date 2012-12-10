@@ -93,6 +93,7 @@
                     title: that._pull_answer_value_from_spreadsheet(row, 'title', i, is_correct),
                     text : that._pull_answer_value_from_spreadsheet(row, 'text', i, is_correct),
                     topimage: that._pull_answer_value_from_spreadsheet(row, 'topimage', i, is_correct),
+					middleimage: that._pull_answer_value_from_spreadsheet(row, 'middleimage', i, is_correct),
                     bottomimage: that._pull_answer_value_from_spreadsheet(row, 'bottomimage', i, is_correct),
                     backgroundimage: that._pull_answer_value_from_spreadsheet(row, 'backgroundimage', i, is_correct)
                 };
@@ -129,6 +130,7 @@
                                        title: row.questiontitle,
                                        text : row.questiontext,
                                        topimage: row.questiontopimage,
+									   middleimage: row.questionmiddleimage,
                                        bottomimage: row.questionbottomimage,
                                        backgroundimage: row.questionbackgroundimage
                         },
@@ -163,7 +165,10 @@
                     + ( question.title 
                             ? '<h1>' + question.title + '</h1>' 
                             : ''  )
-                    + '<p>' + question.text + '</p>'
+                   	+ ( question.middleimage 
+		                    ? '<img src="' + question.middleimage + '" class="middleimage"></img>' 
+		                    : ''  )                    
+					+ '<p>' + question.text + '</p>'
                     + ( question.bottomimage 
                             ? '<img src="' + question.bottomimage + '" class="topimage"></img>' 
                             : ''  )
@@ -185,6 +190,9 @@
                               + ( answer.title 
                                   ? '<h1>' + answer.title + '</h1>' 
                                   : ''  )
+			                  + ( answer.middleimage 
+					              ? '<img src="' + answer.middleimage + '" class="middleimage"></img>' 
+					              : ''  )
                               + '<p>' + answer.text + '</p>'
                               + ( answer.bottomimage 
                                   ? '<img src="' + answer.bottomimage + '" class="topimage"></img>' 
