@@ -13,12 +13,8 @@
 }
 
 /*added custom styling*/
-.question_container h1 {
-	font-size: 2.5em;
-}
-
-.question p, .revealed_answer p {
-	padding-top: 1em;
+.question_container h1, .question p, .revealed_answer p {
+	padding: .25em 0 1em 0;
 	font-size: 1.5em;
 	font-weight: bold;
 	line-height: 1.5em;	
@@ -41,7 +37,7 @@
 
 .revealed_answer p {
 	font-size: 1em;
-	line-height: 1em;
+	line-height: 1.5em;
 	padding-top: 1.5em;
 }
 
