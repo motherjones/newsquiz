@@ -96,6 +96,7 @@
                     title: that._pull_answer_value_from_spreadsheet(row, 'title', i, is_correct),
                     text : that._pull_answer_value_from_spreadsheet(row, 'text', i, is_correct),
                     topimage: that._pull_answer_value_from_spreadsheet(row, 'topimage', i, is_correct),
+					middleimage: that._pull_answer_value_from_spreadsheet(row, 'middleimage', i, is_correct),
                     bottomimage: that._pull_answer_value_from_spreadsheet(row, 'bottomimage', i, is_correct),
                     backgroundimage: that._pull_answer_value_from_spreadsheet(row, 'backgroundimage', i, is_correct)
                 };
@@ -132,6 +133,7 @@
                                        title: row.questiontitle,
                                        text : row.questiontext,
                                        topimage: row.questiontopimage,
+									   middleimage: row.questionmiddleimage,
                                        bottomimage: row.questionbottomimage,
                                        backgroundimage: row.questionbackgroundimage
                         },
@@ -155,8 +157,7 @@
                 container_elem.append(question_container);
             },
             build_question_element_from_row: function(row) {
-                var question = row.question;
-                return jQuery('<div class="question span9 show" '
+                var question = row.question;                return jQuery('<div class="question span12 show" '
                     + ( question.backgroundimage 
                             ? 'style="background-image: url(\'' + question.backgroundimage + '\');">' 
                             : '>' )
@@ -166,7 +167,10 @@
                     + ( question.title 
                             ? '<h1>' + question.title + '</h1>' 
                             : ''  )
-                    + '<p>' + question.text + '</p>'
+                   	+ ( question.middleimage 
+		                    ? '<img src="' + question.middleimage + '" class="middleimage"></img>' 
+		                    : ''  )                    
+					+ '<p>' + question.text + '</p>'
                     + ( question.bottomimage 
                             ? '<img src="' + question.bottomimage + '" class="topimage"></img>' 
                             : ''  )
@@ -178,7 +182,7 @@
                   answer = row.possible_answers[i];
                   revealed_answers_container.append(
                           jQuery('<div class="revealed_answer_' + i
-                              + ' revealed_answer span9 hide" '
+                              + ' revealed_answer span12 hide" '
                               + ( answer.backgroundimage 
                                   ? 'style="background-image: url(\'' + answer.backgroundimage + '\');">' 
                                   : '>' )
@@ -188,6 +192,9 @@
                               + ( answer.title 
                                   ? '<h1>' + answer.title + '</h1>' 
                                   : ''  )
+			                  + ( answer.middleimage 
+					              ? '<img src="' + answer.middleimage + '" class="middleimage"></img>' 
+					              : ''  )
                               + '<p>' + answer.text + '</p>'
                               + ( answer.bottomimage 
                                   ? '<img src="' + answer.bottomimage + '" class="topimage"></img>' 
@@ -198,11 +205,11 @@
               return revealed_answers_container;
             },
             build_possible_answer_elements_from_row : function(question, question_index) {
-                var answers_container = jQuery('<ul class="possible_answers possible_answers_'
+                var answers_container = jQuery('<ul class="span9 possible_answers possible_answers_'
                     + question_index + '"></ul>');
                 for (var i = 0; i < question.possible_answers.length; i++) {
                     var answer_data = question.possible_answers[i];
-                    var possible_answer = jQuery('<li class="possible_answer span4 answer_' 
+                    var possible_answer = jQuery('<li class="possible_answer span12 answer_' 
                         + i
                         + '">'
                         + answer_data.answer
