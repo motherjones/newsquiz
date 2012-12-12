@@ -45,20 +45,25 @@
 	padding-top: 1.5em;
 }
 
-.correct_answer.selected {
+.correct_answer {
 	background: #48B070;
 	color: white;
 	cursor: pointer;
 	font-weight: bold;
 	background-image: ;
+    opacity: .5;
 }
 
-.wrong_answer.selected {
+.wrong_answer {
 	background: #E64522;
 	color: white;
 	cursor: pointer;
 	font-weight: bold;
 	background-image: ;
+    opacity: .5;
+}
+.selected {
+    opacity: 1;
 }
 
 .hide {display: none;}
