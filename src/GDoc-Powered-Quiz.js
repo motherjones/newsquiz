@@ -68,7 +68,10 @@
                         ?  row[correct + wrong_number + value]
                         : (row[correct + value]
                                ? row[correct + value]
-                               : row['answer' + value]
+                               : ( row['answer' + value]
+                                    ? row['answer' + value]
+                                    : row['question' + value]
+                                 )
                            )
                     );
             },
