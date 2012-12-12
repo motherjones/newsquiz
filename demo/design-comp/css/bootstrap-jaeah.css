@@ -1,22 +1,64 @@
 .row-fluid {
 	width: 100%;
-	max-width: 630px;
-	margin: 10px;
 }
 
+/*fluid grid layout using twitter bootstrap */
 .span12 {
-	padding: 10px;
-	margin: 5px 5px 5px 0;
+	padding: 1em;
+	margin: 5px 5px 0 0;
+}
+
+.span12.question {
+	padding: 0;
+}
+
+/*added custom styling*/
+.question_container h1 {
+	font-size: 2.5em;
+}
+
+.question p, .revealed_answer p {
+	padding-top: 1em;
+	font-size: 1.5em;
+	font-weight: bold;
+	line-height: 1.5em;	
 }
 
 .possible_answer {
-	background: #eee;
+	background: #ccc;
 	margin-left: 0 !important;
+	border-radius: 2px;
 }
 
 .possible_answer:hover {
-	background: #F87467;
+	background: #2B2B28;
 	color: white;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+/*what happens after you click on an answer*/
+
+.revealed_answer p {
+	font-size: 1em;
+	line-height: 1em;
+	padding-top: 1.5em;
+}
+
+.correct_answer.selected {
+	background: #48B070;
+	color: white;
+	cursor: pointer;
+	font-weight: bold;
+	background-image: ;
+}
+
+.wrong_answer.selected {
+	background: #E64522;
+	color: white;
+	cursor: pointer;
+	font-weight: bold;
+	background-image: ;
 }
 
 .hide {display: none;}
@@ -24,11 +66,11 @@
 .show {display: block;}
 
 .question img, .revealed_answer img {
-    max-height: 250px;
+    max-height: 200px;
     display: block;
 }
 
 .quiz_container {
-    margin: 0px;
     list-style-type: none;
 }
+
