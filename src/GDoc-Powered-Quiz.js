@@ -216,7 +216,8 @@
                         + '</li>');
                     (function(question_index, answer_index, possible_answer) {
                         possible_answer.bind('click', function() {
-                            answers_container.find('li').addClass('answered_question_answer');
+                            answers_container.find('.selected').removeClass('selected');
+                            $(this).addClass('selected');
                             var was_correct = that.quiz_data[question_index].possible_answers[answer_index].correct;
                             if ( typeof(answer_tracking[question_index]) === 'undefined' ) {
                                 answer_tracking[question_index] = was_correct;
