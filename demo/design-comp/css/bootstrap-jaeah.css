@@ -1,69 +1,85 @@
+body {
+	font-weight: bold;
+}
+
+/*fluid grid layout using twitter bootstrap */
 .row-fluid {
 	width: 100%;
 }
 
-/*fluid grid layout using twitter bootstrap */
 .span12 {
-	padding: 1em;
-	margin: 5px 5px 0 0;
+	padding: .75em;
+	margin-top: .75em;
 }
 
 .span12.question {
 	padding: 0;
 }
 
-/*added custom styling*/
-.question_container h1 {
-	font-size: 2.5em;
-}
-
-.question p, .revealed_answer p {
-	padding-top: 1em;
+/*additional custom styling*/
+.question_container h1, .question p, .revealed_answer p {
+	padding: .25em 0 .5em 0;
 	font-size: 1.5em;
-	font-weight: bold;
 	line-height: 1.5em;	
 }
 
+.question_container h1 {
+	padding-top: 1em;
+}
+
+.possible_answers.span12 {
+	padding: 0;
+	margin: 0;
+}
+
 .possible_answer {
-	background: #ccc;
+	background: #FFF8DE;
 	margin-left: 0 !important;
 	border-radius: 2px;
 }
 
 .possible_answer:hover {
-	background: #2B2B28;
-	color: white;
+	background: #FCDF21;
 	cursor: pointer;
-	font-weight: bold;
+	color: #000;
+}
+
+.possible_answer img {
+	max-height: 18em;
 }
 
 /*what happens after you click on an answer*/
 
 .revealed_answer p {
 	font-size: 1em;
-	line-height: 1em;
-	padding-top: 1.5em;
+	line-height: 1.5em;
+	padding: 1em 0 0 0;
+	margin: 0;
 }
 
 .correct_answer {
 	background: #48B070;
 	color: white;
 	cursor: pointer;
-	font-weight: bold;
 	background-image: ;
-    opacity: .5;
 }
 
 .wrong_answer {
 	background: #E64522;
 	color: white;
 	cursor: pointer;
-	font-weight: bold;
-	background-image: ;
-    opacity: .5;
 }
+
 .selected {
     opacity: 1;
+	border: 4px solid #FCDF21;
+	color: black;
+}
+
+.selected:hover {
+	opacity: .5;
+	color: black;
+	background: #eee;
 }
 
 .hide {display: none;}
@@ -71,7 +87,7 @@
 .show {display: block;}
 
 .question img, .revealed_answer img {
-    max-height: 200px;
+    max-height: 18em;
     display: block;
 }
 

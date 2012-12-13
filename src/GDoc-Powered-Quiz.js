@@ -223,7 +223,7 @@
               return revealed_answers_container;
             },
             build_possible_answer_elements_from_row : function(question, question_index) {
-                var answers_container = jQuery('<ul class="span9 possible_answers possible_answers_'
+                var answers_container = jQuery('<ul class="span12 possible_answers possible_answers_'
                     + question_index + '"></ul>');
                 for (var i = 0; i < question.possible_answers.length; i++) {
                     var answer_data = question.possible_answers[i];
