@@ -164,7 +164,6 @@
             },
             build_question_element_from_row: function(row) {
                 var question = row.question;
-             console.log('string' + question.youtube + 'blah');
                 return jQuery('<div class="question span12 show" '
                     + ( question.backgroundimage 
                             ? 'style="background-image: url(\'' + question.backgroundimage + '\');">' 
@@ -179,7 +178,7 @@
 		                    ? '<img src="' + question.middleimage + '" class="middleimage"></img>' 
                             : ''  )                    
                     + ( question.youtube 
-                        ? '<div class="youtube"><iframe width="420" height="315" src="http://www.youtube.com/embed/' +
+                        ? '<div class="youtube"><iframe width="420" height="315" src="http://www.youtube.com/embed/'
                         + '' + question.youtube + ''
                         + '" frameborder="0" allowfullscreen></iframe></div>' 
                         : ''  )
