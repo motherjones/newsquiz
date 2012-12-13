@@ -1,5 +1,6 @@
 body {
 	font-weight: bold;
+	color: #21252E;
 }
 
 /*fluid grid layout using twitter bootstrap */
@@ -69,14 +70,12 @@ body {
 .correct_answer {
 	background: #62DA97;
 	opacity: .5;
-	color: white;
 	cursor: pointer;
 }
 
 .wrong_answer {
 	background: #FF8362;	
 	opacity: .5;
-	color: white;
 	cursor: pointer;
 }
 
@@ -93,7 +92,7 @@ body {
 
 .show {display: block;}
 
-.question img, .revealed_answer img {
+.question img, .revealed_answer img, .selected img, .correct_answer img, .wrong_answer img {
     max-height: 18em;
     display: block;
 }
