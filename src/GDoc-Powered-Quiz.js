@@ -236,6 +236,7 @@
                         possible_answer.bind('click', function() {
                             answers_container.find('.selected').removeClass('selected');
                             $(this).addClass('selected');
+                            $(this).removeClass('possible_answer');
                             var was_correct = that.quiz_data[question_index].possible_answers[answer_index].correct;
                             if ( typeof(answer_tracking[question_index]) === 'undefined' ) {
                                 answer_tracking[question_index] = was_correct;
