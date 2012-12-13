@@ -97,6 +97,7 @@
                     text : that._pull_answer_value_from_spreadsheet(row, 'text', i, is_correct),
                     topimage: that._pull_answer_value_from_spreadsheet(row, 'topimage', i, is_correct),
 					middleimage: that._pull_answer_value_from_spreadsheet(row, 'middleimage', i, is_correct),
+					youtube: that.pull_youtube_id(that._pull_answer_value_from_spreadsheet(row, 'youtube', i, is_correct)),
                     bottomimage: that._pull_answer_value_from_spreadsheet(row, 'bottomimage', i, is_correct),
                     backgroundimage: that._pull_answer_value_from_spreadsheet(row, 'backgroundimage', i, is_correct)
                 };
@@ -134,6 +135,7 @@
                                        text : row.questiontext,
                                        topimage: row.questiontopimage,
 									   middleimage: row.questionmiddleimage,
+									   youtube: that.pull_youtube_id(row.questionyoutube),
                                        bottomimage: row.questionbottomimage,
                                        backgroundimage: row.questionbackgroundimage
                         },
@@ -144,6 +146,10 @@
                     quiz.push(question);
                 }
                 return quiz;
+            },
+            pull_youtube_id : function(youtube_url) {
+                youtube_id = youtube_url.match(/=.*?$/);
+                return youtube_id ? youtube_id[0].replace('=', '') : '';
             },
             append_question : function(question_index) {
                 var question_data = that.quiz_data[question_index]
@@ -157,7 +163,9 @@
                 container_elem.append(question_container);
             },
             build_question_element_from_row: function(row) {
-                var question = row.question;                return jQuery('<div class="question span12 show" '
+                var question = row.question;
+             console.log('string' + question.youtube + 'blah');
+                return jQuery('<div class="question span12 show" '
                     + ( question.backgroundimage 
                             ? 'style="background-image: url(\'' + question.backgroundimage + '\');">' 
                             : '>' )
@@ -169,7 +177,12 @@
                             : ''  )
                    	+ ( question.middleimage 
 		                    ? '<img src="' + question.middleimage + '" class="middleimage"></img>' 
-		                    : ''  )                    
+                            : ''  )                    
+                    + ( question.youtube 
+                        ? '<div class="youtube"><iframe width="420" height="315" src="http://www.youtube.com/embed/' +
+                        + '' + question.youtube + ''
+                        + '" frameborder="0" allowfullscreen></iframe></div>' 
+                        : ''  )
 					+ '<p>' + question.text + '</p>'
                     + ( question.bottomimage 
                             ? '<img src="' + question.bottomimage + '" class="topimage"></img>' 
@@ -194,6 +207,11 @@
                                   : ''  )
 			                  + ( answer.middleimage 
 					              ? '<img src="' + answer.middleimage + '" class="middleimage"></img>' 
+					              : ''  )
+			                  + ( answer.youtube 
+					              ? '<div class="youtube"><iframe width="420" height="315" src="http://www.youtube.com/embed/' +
+                                  + answer.youtube
+                                  + '" frameborder="0" allowfullscreen></iframe></div>' 
 					              : ''  )
                               + '<p>' + answer.text + '</p>'
                               + ( answer.bottomimage 
