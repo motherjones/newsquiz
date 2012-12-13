@@ -148,6 +148,7 @@
                 return quiz;
             },
             pull_youtube_id : function(youtube_url) {
+                if (!youtube_url) { return; }
                 youtube_id = youtube_url.match(/=.*?$/);
                 return youtube_id ? youtube_id[0].replace('=', '') : '';
             },
