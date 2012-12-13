@@ -112,7 +112,7 @@
                     var right_answer_placement = [];
                     for (var j = 0; j < possible_right_answers.length; j++) {
                         right_answer_placement.push(
-                            Math.floor(Math.random() * possible_wrong_answers.length)
+                            Math.round(Math.random() * possible_wrong_answers.length)
                         );
                     }
                     // IMPORTANT TO SORT THIS. rather than check if a value is in, we only check the first
@@ -120,11 +120,14 @@
 
                     var possible_answers= [];
                     var right_answers_placed = 0;
-                    for (var j = 0; j < possible_wrong_answers.length; j++) {
+                    for (var j = 0; j <= possible_wrong_answers.length; j++) {
                         while (j === right_answer_placement[right_answers_placed]) {
                             //push right answer
                             possible_answers.push(possible_right_answers[right_answers_placed]);
                             right_answers_placed++;
+                        }
+                        if (j === possible_wrong_answers.length) {
+                            continue;
                         }
                         possible_answers.push(possible_wrong_answers[j]);
                     }
