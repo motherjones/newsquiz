@@ -39,7 +39,7 @@ body {
 }
 
 .possible_answer:hover {
-	background: #FCDF21;
+	background: #FEE758;
 	cursor: pointer;
 	color: #000;
 }
@@ -57,15 +57,24 @@ body {
 	margin: 0;
 }
 
+.revealed_answer a {
+	color: #E64522;
+}
+
+.revealed_answer a:hover {
+	opacity: .75;
+	text-decoration: none;
+}
+
 .correct_answer {
-	background: #48B070;
+	background: #62DA97;
 	color: white;
 	cursor: pointer;
 	background-image: ;
 }
 
 .wrong_answer {
-	background: #E64522;
+	background: #FF8362;
 	color: white;
 	cursor: pointer;
 }
@@ -79,7 +88,6 @@ body {
 .selected:hover {
 	opacity: .5;
 	color: black;
-	background: #eee;
 }
 
 .hide {display: none;}
