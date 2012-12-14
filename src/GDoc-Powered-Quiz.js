@@ -94,6 +94,7 @@
                     answer: row[right_or_wrong + i],
                     correct: is_correct,
                     title: that._pull_answer_value_from_spreadsheet(row, 'title', i, is_correct),
+                    subhed: that._pull_answer_value_from_spreadsheet(row, 'subhed', i, is_correct),
                     text : that._pull_answer_value_from_spreadsheet(row, 'text', i, is_correct),
                     topimage: that._pull_answer_value_from_spreadsheet(row, 'topimage', i, is_correct),
 					middleimage: that._pull_answer_value_from_spreadsheet(row, 'middleimage', i, is_correct),
@@ -135,6 +136,7 @@
                     var question = {
                         question : {
                                        title: row.questiontitle,
+                                       subhed: row.questionsubhed,
                                        text : row.questiontext,
                                        topimage: row.questiontopimage,
 									   middleimage: row.questionmiddleimage,
@@ -186,6 +188,9 @@
                         + '' + question.youtube + ''
                         + '" frameborder="0" allowfullscreen></iframe></div>' 
                         : ''  )
+                    + ( question.subhed 
+                            ? '<h2>' + question.subhed + '</h2>' 
+                            : ''  )
 					+ '<p>' + question.text + '</p>'
                     + ( question.bottomimage 
                             ? '<img src="' + question.bottomimage + '" class="topimage"></img>' 
@@ -216,6 +221,9 @@
                                   + answer.youtube
                                   + '" frameborder="0" allowfullscreen></iframe></div>' 
 					              : ''  )
+                              + ( answer.subhed 
+                                  ? '<h2>' + answer.subhed + '</h2>' 
+                                  : ''  )
                               + '<p>' + answer.text + '</p>'
                               + ( answer.bottomimage 
                                   ? '<img src="' + answer.bottomimage + '" class="topimage"></img>' 
