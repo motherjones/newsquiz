@@ -1,5 +1,6 @@
 body {
 	font-weight: bold;
+	color: #21252E;
 }
 
 /*fluid grid layout using twitter bootstrap */
@@ -33,13 +34,13 @@ body {
 }
 
 .possible_answer {
-	background: #FFF8DE;
+	background: rgba(254, 231, 88, .2);
 	margin-left: 0 !important;
 	border-radius: 2px;
 }
 
 .possible_answer:hover {
-	background: #FCDF21;
+	background: rgba(254, 231, 88, 1);
 	cursor: pointer;
 	color: #000;
 }
@@ -57,38 +58,47 @@ body {
 	margin: 0;
 }
 
+.revealed_answer a {
+	color: #E64522;
+}
+
+.revealed_answer a:hover {
+	opacity: .75;
+	text-decoration: none;
+}
+
 .correct_answer {
-	background: #48B070;
-	color: white;
+	background: #62DA97;
+	opacity: .5;
 	cursor: pointer;
-	background-image: ;
 }
 
 .wrong_answer {
-	background: #E64522;
-	color: white;
+	background: #FF8362;	
+	opacity: .5;
 	cursor: pointer;
 }
 
 .selected {
     opacity: 1;
-	border: 4px solid #FCDF21;
 	color: black;
 }
 
-.selected:hover {
-	opacity: .5;
-	color: black;
-	background: #eee;
+.selected:hover, .correct_answer:hover, .wrong_answer:hover {
+	opacity: 1;
 }
 
 .hide {display: none;}
 
 .show {display: block;}
 
-.question img, .revealed_answer img {
+.question img, .revealed_answer img, .selected img, .correct_answer img, .wrong_answer img {
     max-height: 18em;
     display: block;
+}
+
+.revealed_answer {
+	padding: 0;
 }
 
 .quiz_container {
