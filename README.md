@@ -86,9 +86,9 @@ Add **question**, **answer**, **right**, or **wrong** before any of these option
 
 ## On Defaulting
 
-Since it is a huge hassle to have to fill in multiple cells with the same information, we fail over to reasonable other cells if a cell is not filled in.
+Since it is a huge hassle to have to fill in multiple cells with the same information, we fail over to more generic cells if a specific value is not filled in.
 
-right 0-9 value defaults to right value, and wrong 0-9 value defaults to wrong value. Both right value and wrong value will default to answer value, and answer value will default to question value. 
+**right 0-9** defaults to **right**, and **wrong 0-9** defaults to **wrong** value. Both **right** and **wrong** will default to **answer**, and **answer** will default to **question**. 
 
 While this makes writing the quiz significantly less tedious, this does mean that you should bear the following in mind: Do Not Mix Different Types of Image Values for a single question. If you do you will find yourself in the ugly position of having multiple images on your answer display. Yuck.
 
