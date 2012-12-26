@@ -70,17 +70,19 @@ See a demo of an advanced quiz with extra bells and whistles [here](https://docs
 
 ### Reference
 
-`question title` is 
+`title` is 
 
-`question text` is
+`text` is
 
-`question middle image` is
+`middle image` is
 
-`question bottom image` is
+`bottom image` is
 
-`question background image` is
+`background image` is
 
-`question youtube` is
+`youtube` is
+
+`0-9` is
 
 ## On Defaulting
 
@@ -125,19 +127,15 @@ Writing your quiz in JSON is supported, though discouraged if you don't know JSO
 ```
 You can pass that in as an argument instead of a Google Spreadsheet key, if you prefer.
 
-
 ## Strange behavior
 
 **Empty tables are trouble.** We can't get column names from them (c'mon, Google!), so don't be too confused when a table with 0 rows is coming back with an empty `.column_names` or your code starts throwing weird errors when processing the results.
-
-## If you are having trouble
-
-Turn on debugging by passing `debug: true` when you initialize Tabletop. Check out the console, I try to keep my error messages chatty and informative.
 
 ## NewsQuiz.js in the wild
 
 **The more examples the better, right?** Feel free to fork or contact me if you have a good example of something you've done.
 
+Coming soon.
 
 ## Credits
 
