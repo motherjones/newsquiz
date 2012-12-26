@@ -28,17 +28,15 @@ Start a new Google Spreadsheet with the following column headers:
     
 (Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that later).
 
-Write in all of your questions and answers. Want to include links? Write them in using anchor tags. 
-
-You can see a demo Google Spreadsheet [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0).
+Write in all of your questions and answers. Want to include links? Stick anchor tags right in the cells.
   
 In Google Docs, go up to the `File` menu and pick `Publish to the web`. Fiddle with whatever you want, then click `Start publishing`. A URL will appear, something like `https://docs.google.com/spreadsheet/pub?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc&output=html`
 
 Copy that! In theory you're interested in the part between `key=` and `&` but you can use the whole thing if you want.
 
-[Demo sheet](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
+[Demo spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
-### 2) Set up your html page
+### 2) Set up your index.html page
 
 Try the following, substituting your URL for `public_spreadsheet_url`
 
@@ -66,9 +64,11 @@ Load your index.html page in a browser, and check it out! **Pretty rad!**
 
 Want to mix pictures and video into your questions and answers? Want to add an extra title to some of your answers, but not all? We've included lots of flexible features.
 
-See a demo of an advanced quiz with extra bells and whistles [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0). The spreadsheet driving this demo is [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0).
+See a demo of an advanced quiz with extra bells and whistles [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0). The spreadsheet driving this advanced demo is [here](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0).
 
 ### Reference
+
+Add **question**, **answer**, **right**, or **wrong** before any of these options to apply to the right portion of your quiz item.
 
 `title` is 
 
