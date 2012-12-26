@@ -90,7 +90,11 @@ Since it is a huge hassle to have to fill in multiple cells with the same inform
 
 **right 0-9** defaults to **right**, and **wrong 0-9** defaults to **wrong** value. Both **right** and **wrong** will default to **answer**, and **answer** will default to **question**. 
 
-While this makes writing the quiz significantly less tedious, this does mean that you should bear the following in mind: Do Not Mix Different Types of Image Values for a single question. If you do you will find yourself in the ugly position of having multiple images on your answer display. Yuck.
+While this makes writing the quiz significantly less tedious, this does mean that you should bear the following in mind: 
+
+**Do Not Mix Different Types of Image Values for a Single Question.**
+
+If you do you will find yourself in the ugly position of having multiple images all over your answer. Yuck.
 
 ## Writing your quiz in JSON
 
@@ -137,14 +141,6 @@ You can pass that in as an argument instead of a Google Spreadsheet key, if you 
 
 Coming soon.
 
-## Credits
-
-[Ben Breedlove](http://twitter.com/bdbreedlove), TK he built it.
-
-[Jaeah Lee](http://twitter.com/jeaahjlee), TK she designed and implemented fluid layout.
-
-[Tasneem Raja](http://twitter.com/tasneemraja), who headbangs to Fleetwood Mac 'Rhiannon' while writing documentation.
-
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
 
@@ -174,3 +170,11 @@ Note that the `phantomjs` executable needs to be in the system `PATH` for grunt 
 * [How to set the path and environment variables in Windows](http://www.computerhope.com/issues/ch000549.htm)
 * [Where does $PATH get set in OS X 10.6 Snow Leopard?](http://superuser.com/questions/69130/where-does-path-get-set-in-os-x-10-6-snow-leopard)
 * [How do I change the PATH variable in Linux](https://www.google.com/search?q=How+do+I+change+the+PATH+variable+in+Linux)
+
+## Credits
+
+[Ben Breedlove](http://twitter.com/bdbreedlove), TK he built it.
+
+[Jaeah Lee](http://twitter.com/jeaahjlee), TK she designed and implemented fluid layout.
+
+[Tasneem Raja](http://twitter.com/tasneemraja), who headbangs to Fleetwood Mac 'Rhiannon' while writing documentation.
