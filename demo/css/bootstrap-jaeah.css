@@ -1,6 +1,11 @@
 body {
 	font-weight: bold;
 	color: #21252E;
+	width: 630px;
+}
+
+.quiz_container {
+    list-style-type: none;
 }
 
 /*fluid grid layout using twitter bootstrap */
@@ -18,14 +23,22 @@ body {
 }
 
 /*additional custom styling*/
+
+.question_container {
+	margin: 3em 0em;
+}
+
 .question_container h1, .question p, .revealed_answer p {
-	padding: .25em 0 .5em 0;
-	font-size: 1.5em;
 	line-height: 1.5em;	
 }
 
 .question_container h1 {
-	padding-top: 1em;
+	font-size: 2.5em;
+}
+
+.question p {
+	font-size: 1.5em;
+	max-height: 8em;
 }
 
 .possible_answers.span12 {
@@ -49,13 +62,15 @@ body {
 	max-height: 18em;
 }
 
-/*what happens after you click on an answer*/
+/*more styling for answers*/
 
 .revealed_answer p {
 	font-size: 1em;
 	line-height: 1.5em;
 	padding: 1em 0 0 0;
 	margin: 0;
+	min-height: 8em;
+
 }
 
 .revealed_answer a {
@@ -101,9 +116,6 @@ body {
 	padding: 0;
 }
 
-.quiz_container {
-    list-style-type: none;
-}
 
 .youtube {
     position: relative;

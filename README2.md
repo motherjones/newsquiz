@@ -1,45 +1,30 @@
 # **NewsQuiz.js** (spreadsheet to quiz!)
 
-**NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz. It's easy!
+**NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. It's easy!
 
 ### Like how easy?
 
-    function init() {
-      Tabletop.init( { key: '0AmYzu_s7QHsmdDNZUzRlYldnWTZCLXdrMXlYQzVxSFE',
-                       callback: function(data, tabletop) { console.log(data) },
-                       simpleSheet: true } )
-    }
+    <div id="quiz_container"></div>
 
-Will give you
-
-    [ { name: "Carrot", category: "Vegetable", healthiness: "Adequate" }, 
-      { name: "Pork Shoulder", category: "Meat", healthiness: "Questionable" }, 
-      { name: "Bubblegum", category: "Candy", healthiness: "Super High"} ]
-
-Yes, that easy.
-
-## Notes
-
-### To existing users: things have changed!
-
-Not too much, though.
-
-We now support multiple instances of Tabletop, so no more `Tabletop.sheets('Cats')`. You'll want to assign your init to a variable and use <em>that</em>. Take a look at the examples, it's not too tough to switch over.
+	<script>
+		jQuery(function($) {
+	  		$('#quiz_container').quiz(YOUR_SPREADSHEET_KEY); //The hardest part: writing the actual quiz.
+		});
+	</script>
 
 ## Getting Started
 
-### 1) Getting your data out there
+### 1) Making a Really Basic Quiz
 
-_The first step is to get your data out into a form Tabletop can digest_
+_The first step is to set up your quiz in a form NewsQuiz can digest_
 
-Take a Google Spreadsheet. Give it some column headers, give it some content.
+Start a new Google Spreadsheet with the following column headers:
 
-    Name            Category   Healthiness
-    Carrot          Vegetable  Adequate
-    Pork Shoulder   Meat       Questionable
-    Bubblegum       Candy      Super High
+    question title	question text	right	right text	wrong	wrong text
+    
+Write in all of your questions and answers. If you want to include hyperlinks, write them in using <a> tags. (Don't worry if you want to include extra goodies like images, videos, or additional titles—we'll get to that later).
   
-In Google Docs, then go up to the `File` menu and pick `Publish to the web`. Fiddle with whatever you want, then click `Start publishing`. A URL will appear, something like `https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0AmYzu_s7QHsmdDNZUzRlYldnWTZCLXdrMXlYQzVxSFE&output=html`
+In Google Docs, then go up to the `File` menu and pick `Publish to the web`. Fiddle with whatever you want, then click `Start publishing`. A URL will appear, something like `https://docs.google.com/spreadsheet/pub?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc&output=html`
 
 Copy that! In theory you're interested in the part between `key=` and `&` but you can use the whole thing if you want.
 
