@@ -68,21 +68,21 @@ See a demo of an advanced quiz with extra bells and whistles [here](https://docs
 
 ### Reference
 
-Add **question**, **answer**, **right**, or **wrong** before any of these options to apply to the right portion of your quiz item.
+Add **question**, **answer**, **right**, or **wrong** before any of these options in your column headers to apply to the right portion of your quiz item. See the [demo](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0) to see these options in action. You don't have to include all of these values for each item; see the section on Defaulting below.
 
-`title` is 
+`title` is the headline of each item.
 
-`text` is
+`text` is a blurb.
 
-`middle image` is
+`middle image` puts an image below the title.
 
-`bottom image` is
+`bottom image` put an image below the text.
 
-`background image` is
+`background image` puts an image behind the text.
 
-`youtube` is
+`youtube` puts a video below the text.
 
-`0-9` is
+`0-9` is COMING SOON
 
 ## On Defaulting
 
