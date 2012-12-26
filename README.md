@@ -1,47 +1,100 @@
-# GDoc Powered Quiz
+# **NewsQuiz.js** 
 
-Creates a quiz from a google spreadsheet.
+## Spreadsheet to quiz!
 
-## Getting Started
-Download the [production version][min] or the [development version][max].
+**NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. It's easy!
 
-[min]: https://raw.github.com/motherjones/GDoc-Powered-Quiz/master/dist/GDoc-Powered-Quiz.min.js
-[max]: https://raw.github.com/motherjones/GDoc-Powered-Quiz/master/dist/GDoc-Powered-Quiz.js
+[Demo](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
-In your web page:
+### Like how easy?
 
-```html
-<script src="jquery.js"></script>
-<script src="libs/tabletop.js"></script>
-<script src="dist/GDoc-Powered-Quiz.min.js"></script>
+    <div id="quiz_container"></div>
 
+	<script>
+		jQuery(function($) {
+	  		$('#quiz_container').quiz(YOUR_SPREADSHEET_KEY); //The hard part: writing the actual quiz.
+		});
+	</script>
+	
+The hard part: writing the actual quiz.
 
-<div id="quiz_container"></div>
+# Getting Started: Make a Really Basic Quiz
 
-<script>
-jQuery(function($) {
-  $('#quiz_container').quiz(YOUR_SPREADSHEET_KEY); //Yeah, the hard part is making the quiz.
-});
-</script>
-```
+### 1) Set up a Google Spreadsheet
 
-Then all you have to do is actually write your quiz.
+Start a new Google Spreadsheet with the following column headers:
 
-## Writing your quiz in a spreadsheet
+    question title	question text	right	right text	wrong	wrong text
+    
+(Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that later).
 
-The spreadsheet powering this should look something like the one here: https://docs.google.com/spreadsheet/pub?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc&output=html
+Write in all of your questions and answers. Want to include links? Stick anchor tags right in the cells.
+  
+In Google Docs, go up to the `File` menu and pick `Publish to the web`. Fiddle with whatever you want, then click `Start publishing`. A URL will appear, something like `https://docs.google.com/spreadsheet/pub?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc&output=html`
 
-Each row will become a new question.  Each question requires two parts, the question being asked, and the possible answers. We allow an arbitrary number of answers, but I suggest between 2 and 5.
+Copy that! In theory you're interested in the part between `key=` and `&` but you can use the whole thing if you want.
 
-The columns that control the quesiton are question title, question text, question subhed, question top image, question middle image, question youtube, question bottom image, and question background image. I recommend a title, a text, and only one of top image, middle image, background image, or youtube.
+[Demo spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
-Forming the columns that control the possibl answers are a little trickier. Answers which are correct start with 'right' and answers which are incorrect start with 'wrong'. The columns which control the answers are the same as the columns which control the quesiton (title, text, subhed, top image, middle image, background image, bottom image, youtube), but also MUST include a column which includes the answer as it is displayed as an option, labeled simply right or wrong. So for example if you wanted an correct answer which displays as "Mary Harris Jones", you would add a column titled "right", with the value "Mary Harris Jones".
+### 2) Set up your index.html page
 
-To add additional correct or incorrect answers, add a number between 0 and 9 after "right" or "wrong". So in order to have a third wrong answer, you would have columns "wrong 2", "wrong 2 title", "wrong 2 text", and so on.
+Try the following, substituting your URL for `public_spreadsheet_url`
+
+		<html>
+		<head>
+			<script src="../libs/jquery/jquery.js"></script>
+			<script src="../libs/tabletop.js"></script>
+			<script src="../src/GDoc-Powered-Quiz.js"></script>      
+			<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+			<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+			<link href="css/bootstrap-jaeah.css" rel="stylesheet" media="screen">
+		</head>
+		<body>
+			<div id="quiz_container"></div>
+			<script type="text/javascript">
+			var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url');
+			</script>
+		</body>
+		</html>
+
+Load your index.html page in a browser, and check it out! **Pretty rad!** 
+
+# Advanced Quiz
+## Let's get fancy.
+
+Want to mix pictures and video into your questions and answers? Want to add an extra title to some of your answers, but not all? We've included lots of flexible features.
+
+See a demo of an advanced quiz with extra bells and whistles [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0). The spreadsheet driving this advanced demo is [here](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0).
+
+### Reference
+
+Add **question**, **answer**, **right**, or **wrong** before any of these options in your column headers to apply to the right portion of your quiz item. See the [demo](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0) to see these options in action. You don't have to include all of these values for each item; see the section on Defaulting below.
+
+`title` is the headline of each item.
+
+`text` is a blurb.
+
+`middle image` puts an image below the title.
+
+`bottom image` put an image below the text.
+
+`background image` puts an image behind the text.
+
+`youtube` puts a video below the text.
+
+`0-9` is COMING SOON
+
+## On Defaulting
+
+Since it is a huge hassle to have to fill in multiple cells with the same information, we fail over to reasonable other cells if a cell is not filled in.
+
+right 0-9 value defaults to right value, and wrong 0-9 value defaults to wrong value. Both right value and wrong value will default to answer value, and answer value will default to question value. 
+
+While this makes writing the quiz significantly less tedious, this does mean that you should bear the following in mind: Do Not Mix Different Types of Image Values for a single question. If you do you will find yourself in the ugly position of having multiple images on your answer display. Yuck.
 
 ## Writing your quiz in JSON
 
-Writing your quiz in JSON is supported, though discouraged if you don't know JSON. The quiz object is formed like this
+Writing your quiz in JSON is supported, though discouraged if you don't know JSON. The quiz object is formed like this:
 ```
 [
     {
@@ -72,23 +125,25 @@ Writing your quiz in JSON is supported, though discouraged if you don't know JSO
     }
 ]
 ```
-You can pass that in as an argument instead of a google spreadsheet key, if you'd like.
+You can pass that in as an argument instead of a Google Spreadsheet key, if you prefer.
 
+## Strange behavior
 
-## On Defaulting
+**Empty tables are trouble.** We can't get column names from them (c'mon, Google!), so don't be too confused when a table with 0 rows is coming back with an empty `.column_names` or your code starts throwing weird errors when processing the results.
 
-Since it is a huge hassle to have to fill in multiple cells with the same information, we fail over to reasonable other cells if a cell is not filled in.
+## NewsQuiz.js in the wild
 
-right 0-9 value defaults to right value, and wrong 0-9 value defaults to wrong value. Both right value and wrong value will default to answer value, and answer value will default to question value. 
+**The more examples the better, right?** Feel free to fork or contact me if you have a good example of something you've done.
 
-While this makes writing the quiz significantly less tedious, this does mean that you should bear the following in mind: Do Not Mix Different Types of Image Values for a single question. If you do you will find yourself in the ugly position of having multiple images on your answer display. Yuck.
+Coming soon.
 
-## Examples
-_(Coming soon)_
+## Credits
 
-## License
-Copyright (c) 2012 Ben Breedlove  
-Licensed under the MIT, GPL licenses.
+[Ben Breedlove](http://twitter.com/bdbreedlove), TK he built it.
+
+[Jaeah Lee](http://twitter.com/jeaahjlee), TK she designed and implemented fluid layout.
+
+[Tasneem Raja](http://twitter.com/tasneemraja), who headbangs to Fleetwood Mac 'Rhiannon' while writing documentation.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
