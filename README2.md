@@ -4,7 +4,7 @@
 
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. It's easy!
 
-[Working demo](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
+[Demo](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
 ### Like how easy?
 
@@ -26,7 +26,7 @@ Start a new Google Spreadsheet with the following column headers:
 
     question title	question text	right	right text	wrong	wrong text
     
-	(Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that later).
+(Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that later).
 
 Write in all of your questions and answers. Want to include links? Write them in using anchor tags. 
 
