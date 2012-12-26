@@ -32,7 +32,7 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 
 ### 2) Set up your html page
 
-Include Tabletop in your HTML, then try the following, substituting your URL for `public_spreadsheet_url`
+Try the following, substituting your URL for `public_spreadsheet_url`
 
 		<html>
 		<head>
@@ -51,11 +51,9 @@ Include Tabletop in your HTML, then try the following, substituting your URL for
 		</body>
 		</html>
 
-Open up your console and check out the data that you got. All of those rows were turned right into objects! **See how easy that was?** 
+Load your index.html page in a browser, and check it out! **Pretty rad!** 
 
-Please don't hold`window.onload` against me, you're free to use `$(document).ready` and all of that jQuery jazz.
-
-### 3) Honestly, that's it.
+### 3) Looks good, now let's get fancy.
 
 Check out the reference and the examples, but basically you're set. The only thing to think about right _now_ is if you want to deal with multiple sheets you can get rid of `simpleSheet: true` (more on that later).
 
