@@ -12,9 +12,9 @@
 		});
 	</script>
 
-## Getting Started
+## Getting Started: Make a Really Basic Quiz
 
-### 1) Making a Really Basic Quiz
+### 1) Set Up the Google Spreadsheet
 
 _The first step is to set up your quiz in a form NewsQuiz can digest_
 
@@ -22,7 +22,7 @@ Start a new Google Spreadsheet with the following column headers:
 
     question title	question text	right	right text	wrong	wrong text
     
-Write in all of your questions and answers. If you want to include hyperlinks, write them in using <a> tags. (Don't worry if you want to include extra goodies like images, videos, or additional titles—we'll get to that later).
+Write in all of your questions and answers. If you want to include links, write them in using anchor tags. (Don't worry if you want to include extra goodies like images, videos, or additional titles—-we'll get to that later).
   
 In Google Docs, then go up to the `File` menu and pick `Publish to the web`. Fiddle with whatever you want, then click `Start publishing`. A URL will appear, something like `https://docs.google.com/spreadsheet/pub?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc&output=html`
 
