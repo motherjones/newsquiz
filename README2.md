@@ -2,7 +2,7 @@
 
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. It's easy!
 
-Working demo: 
+[Working demo:](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0).
 
 ### Like how easy?
 
