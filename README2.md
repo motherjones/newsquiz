@@ -14,10 +14,9 @@ Working demo:
 		});
 	</script>
 
-## Getting Started: Make a Really Basic Quiz
+# Getting Started: Make a Really Basic Quiz
 
 ### 1) Set up a Google Spreadsheet
-
 
 Start a new Google Spreadsheet with the following column headers:
 
@@ -29,8 +28,7 @@ Write in all of your questions and answers. Want to include links? Write them in
 
 You can see a demo Google Spreadsheet [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0).
   
-
-In Google Docs, then go up to the `File` menu and pick `Publish to the web`. Fiddle with whatever you want, then click `Start publishing`. A URL will appear, something like `https://docs.google.com/spreadsheet/pub?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc&output=html`
+In Google Docs, go up to the `File` menu and pick `Publish to the web`. Fiddle with whatever you want, then click `Start publishing`. A URL will appear, something like `https://docs.google.com/spreadsheet/pub?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc&output=html`
 
 Copy that! In theory you're interested in the part between `key=` and `&` but you can use the whole thing if you want.
 
@@ -57,130 +55,26 @@ Try the following, substituting your URL for `public_spreadsheet_url`
 
 Load your index.html page in a browser, and check it out! **Pretty rad!** 
 
-## Looks good, now let's get fancy.
+# Advanced Quiz
+## Let's get fancy.
 
-Check out the reference and the examples, but basically you're set. The only thing to think about right _now_ is if you want to deal with multiple sheets you can get rid of `simpleSheet: true` (more on that later).
+Want to mix pictures and video into your questions and answers? Want to add an extra title to some of your answers, but not all? We've included lots of flexible features.
 
-You might also be interested in the publishing/republishing/publish-as-it-changes aspects of Google Spreadsheets, but you'll need to google that for any specifics.
+See a demo of an advanced quiz with extra bells and whistles [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0). The spreadsheet driving this demo is [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0).
 
-# Reference
+### Reference
 
-## The Moving Parts
+`question title` is 
 
-### Tabletop initialization
+`question text` is
 
-The simplest Tabletop initialization works like this
+`question middle image` is
 
-    var tabletop = Tabletop.init( { key: public_spreadsheet_url, callback: showInfo } )
-  
-With a function living somewhere else called `showInfo`.
+`question bottom image` is
 
-You pass in either `key` as the actual spreadsheet key, or just the full published-spreadsheet URL. It calls showInfo when done, passing an array of models. Options in general are
+`question background image` is
 
-`key` is the key of the published spreadsheet or the URL of the published spreadsheet.
-
-`callback` is the callback for when the data has been successfully pulled. It will be passed an object containing the models found in the spreadsheet (worksheets => models), and the tabletop instance. Each of these models contains the rows on that worksheet (see Tabletop.Model). If simpleSheet is turned on it simply receives an array of rows of the first worksheet.
-
-`simpleSheet` can be true or false (default false). It assumes you have one table and you don't care what it's called, so it sends the callback an array of rows instead of a list of models. Peek at the examples for more info.
-
-`parseNumbers` can be true or false (default false). If true, Tabletop will automatically parse any numbers for you so they don't run around as strings.
-
-`postProcess` is a function that processes each row after it has been created. Use this to rename columns, compute attributes, etc. See the TimelineSetter example below.
-
-`wanted` is an array of sheets you'd like to pull. If you have 20 sheets in a public spreadsheet you might as well only pull what you need to access. See the example in simple/multiple.html. Defaults to all.
-
-`wait` prevents tabletop from pulling the Google spreadsheet until you're ready. Used in the backbone.js example.
-
-`query` sends a [structured query](https://developers.google.com/google-apps/spreadsheets/#sending_a_structured_query_for_rows) along with the spreadsheet request, so you can ask for rows with `age > 55` and the like. Right now it's passed with *every request*, though, so if you're using multiple tables you'll end up in Problem City. It should work great with `simpleSheet` situations, though.
-
-`debug` returns on debug mode, which gives you plenty of messaging about what's going on under the hood.
-
-`callbackContext` sets the `this` for your callback. It's the tabletop object by default.
-
-### Tabletop itself
-
-Once you've initialized a `tabletop` object you can access its good parts.
-
-`.sheets()` are the `Tabletop.Model`s that were populated, one per worksheet. You access a sheet by its name. 
-
-`.sheets(name)` is how you access a specific sheet. Say I have a worksheet called **Cats I Know**, I'll access it via `tabletop.sheets("Cats I Know")`
-
-`.model_names` are the names of the models [read: sheets] that Tabletop knows about
-
-`.data()` returns the rows of the first model if you're in simpleSheet mode. It's the same as `.sheets()` otherwise. This is just a little sugar.
-
-`.fetch()` manually initializes a pulling of the data
-
-`.addWanted(name)` adds a sheet to the list that are updated with `.fetch`
-
-### Tabletop.Model
-
-Tabletop.Model is pretty boring, let's be honest.
-
-`.name` is the name of the worksheet it came from (the tab at the bottom of the spreadsheet)
-
-`.column_names` gives you the names of the columns in that table
-
-`.all()` returns an array of the rows of the table, in the style of `[ { name: "Tom", age: 5}, { name: "Liz", age: 12 } ]`
-
-`.toArray()` returns the rows of the table with numbered indices instead of named ones [ [ "Tom", 5] , [ "Liz", 12 ] ]
-
-## What the hell do I do with this?
-
-Imagine it's a read-only, JavaScript CMS that you can edit through Google Docs. It's like _Christmas_ up in here.
-
-### Working with Tabletop and Handlebars
-
-Super easy. Just feed the models to Handlebars and you're all set to build the templates.
-
-### Working with Tabletop and Backbone.js
-
-I've put together a Backbone.tabletopSync driver for Backbone collections and models. It's read-only, but you can't really complain if you're powering your Backbone app through Google Spreadsheets.
-
-Source is, of course, in `/src`, and you can check it out in action in `/examples/backbone/`
-
-### Working with Tabletop and TimelineSetter
-
-Tabletop was originally built to work with ProPublica's <a href="http://propublica.github.com/timeline-setter/">TimelineSetter</a>, a JS+Ruby library that creates timelines. You need some specifically-formatted JSON which is created by a Ruby script from a CSV, which means your workflow is usually spreadsheet -> CSV -> Ruby -> JSON -> JS.
-
-With Tabletop, though, you get to hook right into a Google Spreadsheet for all of your info! You just need to massage your data a _little_ bit, thanks to Google's API messing with column names and you needing a timestamp.
-
-You can see this in the examples directory, but here are the important parts.
-
-    <script type="text/javascript">
-      var public_spreadsheet_url = "https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0AmYzu_s7QHsmdHk2akhfdG5iTk96OUt6UjJJX1dYMFE&single=true&gid=0&output=html"
-
-      $(document).ready( function() {
-         /* 
-          Need to post-process elements because Google Spreadsheets abbreviates 
-            'display_date' column as 'displaydate' and you need to parse the date
-            into the 'timestamp' field for TimelineSetter
-          simpleSheet: true sends array of rows to callback, so you don't need to
-            do the whole Tabletop.sheets('Sheet1').all() thing.
-        */
-        Tabletop.init( { key: public_spreadsheet_url,
-                         callback: drawTimeline,
-                         simpleSheet: true,
-                         postProcess: function(element) {
-                           element["display_date"] = element["displaydate"];
-                           element["timestamp"] = Date.parse( element["date"] );
-                         } 
-        })
-      })
-    
-      function drawTimeline(data, tabletop) {
-        var currentTimeline = TimelineSetter.Timeline.boot(
-          data,
-          {"container":"#timeline","interval":""}
-        );
-      }
-    </script>
-
-See the `postProcess` call? That's called on every row after Tabletop.Model gets done working on it. It allows you to rename columns or edit data points without having to messily do it outside of Tabletop. I'm sure it has uses outside of TimelineSetter, too.
-
-A sample lives in `/examples/timeline_setter/`
-
-# Notes
+`question youtube` is
 
 ## Strange behavior
 
@@ -190,7 +84,7 @@ A sample lives in `/examples/timeline_setter/`
 
 Turn on debugging by passing `debug: true` when you initialize Tabletop. Check out the console, I try to keep my error messages chatty and informative.
 
-## Tabletop.js in the wild
+## NewsQuiz.js in the wild
 
 **The more examples the better, right?** Feel free to fork or contact me if you have a good example of something you've done.
 
@@ -204,6 +98,10 @@ A [Facebook-esque timeline](http://builtbybalance.com/github-timeline/) from [Ba
 
 ## Credits
 
-[Jonathan Soma](http://twitter.com/dangerscarf), who would rather be cooking than coding. Inspired by the relentless demands of [John Keefe(https://twitter.com/jkeefe) of WNYC.
+[Ben Breedlove](http://twitter.com/dangerscarf), who would rather be cooking than coding. Inspired by the relentless demands of [John Keefe(https://twitter.com/jkeefe) of WNYC.
+
+[Jaeah Lee](http://twitter.com/dangerscarf), who would rather be cooking than coding. Inspired by the relentless demands of [John Keefe(https://twitter.com/jkeefe) of WNYC.
+
+[Tasneem Raja](http://twitter.com/dangerscarf), who would rather be cooking than coding. Inspired by the relentless demands of [John Keefe(https://twitter.com/jkeefe) of WNYC.
 
 Thanks to [Scott Seaward](https://github.com/plainview) for implementing multi-instance Tabletop.
