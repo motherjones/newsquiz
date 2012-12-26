@@ -14,9 +14,9 @@
 
 ## Getting Started: Make a Really Basic Quiz
 
-### 1) Set Up the Google Spreadsheet
+### 1) Set up a Google Spreadsheet
 
-_The first step is to set up your quiz in a form NewsQuiz can digest._
+The first step is to set up your quiz in a form NewsQuiz can digest.
 
 Start a new Google Spreadsheet with the following column headers:
 
@@ -30,28 +30,26 @@ In Google Docs, then go up to the `File` menu and pick `Publish to the web`. Fid
 
 Copy that! In theory you're interested in the part between `key=` and `&` but you can use the whole thing if you want.
 
-### 2) Setting up Tabletop
-
-_Now you're going to feed your spreadsheet into Tabletop_
+### 2) Set up your html page
 
 Include Tabletop in your HTML, then try the following, substituting your URL for `public_spreadsheet_url`
 
-    <script type="text/javascript">
-      window.onload = function() { init() };
-    
-      var public_spreadsheet_url = 'https://docs.google.com/spreadsheet/pub?hl=en_US&hl=en_US&key=0AmYzu_s7QHsmdDNZUzRlYldnWTZCLXdrMXlYQzVxSFE&output=html';
-
-      function init() {
-        Tabletop.init( { key: public_spreadsheet_url,
-                         callback: showInfo,
-                         simpleSheet: true } )
-      }
-
-      function showInfo(data, tabletop) {
-        alert("Successfully processed!")
-        console.log(data);
-      }
-    </script>
+		<html>
+		<head>
+			<script src="../libs/jquery/jquery.js"></script>
+			<script src="../libs/tabletop.js"></script>
+			<script src="../src/GDoc-Powered-Quiz.js"></script>      
+			<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+			<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+			<link href="css/bootstrap-jaeah.css" rel="stylesheet" media="screen">
+		</head>
+		<body>
+			<div id="quiz_container"></div>
+			<script type="text/javascript">
+			var quiz = jQuery('#quiz_container').quiz('0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc');
+			</script>
+		</body>
+		</html>
 
 Open up your console and check out the data that you got. All of those rows were turned right into objects! **See how easy that was?** 
 
