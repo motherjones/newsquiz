@@ -1,5 +1,5 @@
-/*! GDoc Powered Quiz - v0.1.0 - 2012-12-12
-* https://github.com/motherjones/GDoc-Powered-Quiz
+/*! newsquiz - v0.1.0 - 2012-12-26
+* https://github.com/motherjones/newsquiz
 * Copyright (c) 2012 Ben Breedlove; Licensed MIT, GPL */
 
 (function($) {
@@ -90,6 +90,7 @@
                     answer: row[right_or_wrong + i],
                     correct: is_correct,
                     title: that._pull_answer_value_from_spreadsheet(row, 'title', i, is_correct),
+                    subhed: that._pull_answer_value_from_spreadsheet(row, 'subhed', i, is_correct),
                     text : that._pull_answer_value_from_spreadsheet(row, 'text', i, is_correct),
                     topimage: that._pull_answer_value_from_spreadsheet(row, 'topimage', i, is_correct),
 					middleimage: that._pull_answer_value_from_spreadsheet(row, 'middleimage', i, is_correct),
@@ -108,7 +109,7 @@
                     var right_answer_placement = [];
                     for (var j = 0; j < possible_right_answers.length; j++) {
                         right_answer_placement.push(
-                            Math.floor(Math.random() * possible_wrong_answers.length)
+                            Math.round(Math.random() * possible_wrong_answers.length)
                         );
                     }
                     // IMPORTANT TO SORT THIS. rather than check if a value is in, we only check the first
@@ -116,11 +117,14 @@
 
                     var possible_answers= [];
                     var right_answers_placed = 0;
-                    for (var j = 0; j < possible_wrong_answers.length; j++) {
+                    for (var j = 0; j <= possible_wrong_answers.length; j++) {
                         while (j === right_answer_placement[right_answers_placed]) {
                             //push right answer
                             possible_answers.push(possible_right_answers[right_answers_placed]);
                             right_answers_placed++;
+                        }
+                        if (j === possible_wrong_answers.length) {
+                            continue;
                         }
                         possible_answers.push(possible_wrong_answers[j]);
                     }
@@ -128,6 +132,7 @@
                     var question = {
                         question : {
                                        title: row.questiontitle,
+                                       subhed: row.questionsubhed,
                                        text : row.questiontext,
                                        topimage: row.questiontopimage,
 									   middleimage: row.questionmiddleimage,
@@ -144,6 +149,7 @@
                 return quiz;
             },
             pull_youtube_id : function(youtube_url) {
+                if (!youtube_url) { return; }
                 youtube_id = youtube_url.match(/=.*?$/);
                 return youtube_id ? youtube_id[0].replace('=', '') : '';
             },
@@ -178,6 +184,9 @@
                         + '' + question.youtube + ''
                         + '" frameborder="0" allowfullscreen></iframe></div>' 
                         : ''  )
+                    + ( question.subhed 
+                            ? '<h2>' + question.subhed + '</h2>' 
+                            : ''  )
 					+ '<p>' + question.text + '</p>'
                     + ( question.bottomimage 
                             ? '<img src="' + question.bottomimage + '" class="topimage"></img>' 
@@ -208,6 +217,9 @@
                                   + answer.youtube
                                   + '" frameborder="0" allowfullscreen></iframe></div>' 
 					              : ''  )
+                              + ( answer.subhed 
+                                  ? '<h2>' + answer.subhed + '</h2>' 
+                                  : ''  )
                               + '<p>' + answer.text + '</p>'
                               + ( answer.bottomimage 
                                   ? '<img src="' + answer.bottomimage + '" class="topimage"></img>' 
@@ -231,6 +243,7 @@
                         possible_answer.bind('click', function() {
                             answers_container.find('.selected').removeClass('selected');
                             $(this).addClass('selected');
+                            $(this).removeClass('possible_answer');
                             var was_correct = that.quiz_data[question_index].possible_answers[answer_index].correct;
                             if ( typeof(answer_tracking[question_index]) === 'undefined' ) {
                                 answer_tracking[question_index] = was_correct;
