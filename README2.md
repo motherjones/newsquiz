@@ -2,7 +2,7 @@
 
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. It's easy!
 
-[Working demo:](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0).
+[Working demo:](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
 ### Like how easy?
 
@@ -13,6 +13,8 @@
 	  		$('#quiz_container').quiz(YOUR_SPREADSHEET_KEY); //The hard part: writing the actual quiz.
 		});
 	</script>
+	
+The hard part: writing the actual quiz.
 
 # Getting Started: Make a Really Basic Quiz
 
@@ -22,15 +24,17 @@ Start a new Google Spreadsheet with the following column headers:
 
     question title	question text	right	right text	wrong	wrong text
     
-Write in all of your questions and answers. Want to include links? Write them in using anchor tags. 
+	(Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that later).
 
-(Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that later).
+Write in all of your questions and answers. Want to include links? Write them in using anchor tags. 
 
 You can see a demo Google Spreadsheet [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0).
   
 In Google Docs, go up to the `File` menu and pick `Publish to the web`. Fiddle with whatever you want, then click `Start publishing`. A URL will appear, something like `https://docs.google.com/spreadsheet/pub?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc&output=html`
 
 Copy that! In theory you're interested in the part between `key=` and `&` but you can use the whole thing if you want.
+
+[Demo sheet](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
 ### 2) Set up your html page
 
@@ -48,7 +52,7 @@ Try the following, substituting your URL for `public_spreadsheet_url`
 		<body>
 			<div id="quiz_container"></div>
 			<script type="text/javascript">
-			var quiz = jQuery('#quiz_container').quiz('0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc');
+			var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url');
 			</script>
 		</body>
 		</html>
@@ -88,20 +92,11 @@ Turn on debugging by passing `debug: true` when you initialize Tabletop. Check o
 
 **The more examples the better, right?** Feel free to fork or contact me if you have a good example of something you've done.
 
-A [contextual video player](http://www.aljazeera.com/indepth/interactive/2012/04/20124107156511888.html) with [popcorn.js](http://popcornjs.org) by [@maboa](https://twitter.com/maboa) 
-
-The [WNYC mayoral tracker](http://project.wnyc.org/elections/mayor-tracker/) uses Tabletop along with [Backbone.js](http://backbonejs.org)
-
-A [Facebook-esque timeline](http://builtbybalance.com/github-timeline/) from [Balance Media](http://builtbybalance.com) (with a [git repo](https://github.com/balancemedia/Timeline))
-
-[Mapsheet](https://github.com/jsoma/mapsheet) creates super easy, customizable maps.
 
 ## Credits
 
-[Ben Breedlove](http://twitter.com/dangerscarf), who would rather be cooking than coding. Inspired by the relentless demands of [John Keefe(https://twitter.com/jkeefe) of WNYC.
+[Ben Breedlove](http://twitter.com/bdbreedlove), TK he built it.
 
-[Jaeah Lee](http://twitter.com/dangerscarf), who would rather be cooking than coding. Inspired by the relentless demands of [John Keefe(https://twitter.com/jkeefe) of WNYC.
+[Jaeah Lee](http://twitter.com/jeaahjlee), TK she designed and implemented fluid layout.
 
-[Tasneem Raja](http://twitter.com/dangerscarf), who would rather be cooking than coding. Inspired by the relentless demands of [John Keefe(https://twitter.com/jkeefe) of WNYC.
-
-Thanks to [Scott Seaward](https://github.com/plainview) for implementing multi-instance Tabletop.
+[Tasneem Raja](http://twitter.com/tasneemraja), who headbangs to Fleetwood Mac 'Rhiannon' while writing documentation.
