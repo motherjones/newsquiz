@@ -41,20 +41,20 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 Try the following, substituting your URL for `public_spreadsheet_url`
 
 		<html>
-		<head>
-			<script src="../libs/jquery/jquery.js"></script>
-			<script src="../libs/tabletop.js"></script>
-			<script src="../src/GDoc-Powered-Quiz.js"></script>      
-			<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-			<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
-			<link href="css/bootstrap-jaeah.css" rel="stylesheet" media="screen">
-		</head>
-		<body>
-			<div id="quiz_container"></div>
-			<script type="text/javascript">
-			var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url');
-			</script>
-		</body>
+		    <head>
+		        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		        <script src="js/tabletop.js"></script>
+		        <script src="js/GDoc-Powered-Quiz.min.js"></script>      
+		        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		        <link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+		        <link href="css/style.css" rel="stylesheet" media="screen">
+		    </head>
+		    <body>
+		        <div id="quiz_container"></div>
+		        <script type="text/javascript">
+		                var quiz = jQuery('#quiz_container').quiz('0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc');
+		        </script>
+		    </body>
 		</html>
 
 Load your index.html page in a browser, and check it out! **Pretty rad!** 
