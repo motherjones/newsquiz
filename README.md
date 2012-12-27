@@ -2,15 +2,13 @@
 
 ## Spreadsheet to quiz!
 
-**NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. It's easy!
+**NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. Uses Tabletop, Bootstrap, jQuery, and Google Spreadsheets. It's easy! 
 
 [Basic Demo](http://motherjones.github.com/newsquiz/index-basic.html)
 
 [Advanced Demo](http://motherjones.github.com/newsquiz/index-advanced.html)
 
 ### Like how easy?
-
-Uses Tabletop, Bootstrap, jQuery, and Google Spreadsheets to make this possible: 
 
     <div id="quiz_container"></div>
 
