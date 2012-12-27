@@ -4,6 +4,7 @@
 
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. Uses Tabletop, Bootstrap, jQuery, and Google Spreadsheets. It's easy! 
 
+The quiz looks like this:
 [Basic Demo](http://motherjones.github.com/newsquiz/index-basic.html)
 
 [Advanced Demo](http://motherjones.github.com/newsquiz/index-advanced.html)
@@ -28,7 +29,7 @@ Start a new Google Spreadsheet with the following column headers:
 
     question title	question text	right	right text	wrong	wrong text
     
-(Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that later).
+(Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that [later](https://github.com/motherjones/newsquiz#advanced-quiz)).
 
 Write in all of your questions and answers. Want to include links? Stick anchor tags right in the cells.
   
