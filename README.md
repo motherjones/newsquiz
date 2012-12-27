@@ -5,6 +5,7 @@
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. Uses Tabletop, Bootstrap, jQuery, and Google Spreadsheets. It's easy! 
 
 The quiz looks like this:
+
 [Basic Demo](http://motherjones.github.com/newsquiz/index-basic.html)
 
 [Advanced Demo](http://motherjones.github.com/newsquiz/index-advanced.html)
