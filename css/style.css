@@ -1,0 +1,138 @@
+
+
+.quiz_container {
+    list-style-type: none;
+	font-weight: bold;
+	color: #21252E;
+	width: 630px;
+}
+
+/*fluid grid layout using twitter bootstrap */
+.row-fluid {
+	width: 100%;
+}
+
+.span12 {
+	padding: .75em;
+	margin-top: .75em;
+}
+
+.span12.question {
+	padding: 0;
+}
+
+/*additional custom styling*/
+
+.quiz_container .question_container {
+	margin: 3em 0em;
+}
+
+.quiz_container .question_container h1, .question p, .revealed_answer p {
+	line-height: 1.5em;	
+}
+
+.quiz_container .question_container h1 {
+	font-size: 2.5em;
+}
+
+.quiz_container .question p {
+	font-size: 1.5em;
+	max-height: 8em;
+}
+
+.quiz_container .possible_answers.span12 {
+	padding: 0;
+	margin: 0;
+}
+
+.quiz_container .possible_answer {
+	background: rgba(254, 231, 88, .2);
+	margin-left: 0 !important;
+	border-radius: 2px;
+}
+
+.quiz_container .possible_answer:hover {
+	background: rgba(254, 231, 88, 1);
+	cursor: pointer;
+	color: #000;
+}
+
+/*more styling for answers*/
+
+.quiz_container .revealed_answer p {
+	font-size: 1em;
+	line-height: 1.5em;
+	padding: 1em 0 0 0;
+	margin: 0;
+	min-height: 8em;
+
+}
+
+.quiz_container .revealed_answer a {
+	color: #E64522;
+}
+
+.quiz_container .revealed_answer a:hover {
+	opacity: .75;
+	text-decoration: none;
+}
+
+.quiz_container .correct_answer {
+	background: #62DA97;
+	opacity: .5;
+	cursor: pointer;
+}
+
+.quiz_container .wrong_answer {
+	background: #FF8362;	
+	opacity: .5;
+	cursor: pointer;
+}
+
+.quiz_container .selected {
+    opacity: 1;
+	color: black;
+}
+
+.quiz_container .selected:hover, .correct_answer:hover, .wrong_answer:hover {
+	opacity: 1;
+}
+
+.quiz_container .hide {display: none;}
+
+.quiz_container .show {display: block;}
+
+.quiz_container .revealed_answer {
+	padding: 0;
+}
+
+/*multimedia styling*/
+
+.quiz_container img, .quiz_container .youtube {
+	margin-bottom: 1em;
+}
+
+.quiz_container .possible_answer img {
+	max-height: 18em;
+}
+
+.quiz_container .question img, .revealed_answer img, .selected img, .correct_answer img, .wrong_answer img {
+    max-height: 18em;
+    display: block;
+}
+
+.quiz_container .youtube {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.quiz_container .youtube iframe, .youtube object, .youtube embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
