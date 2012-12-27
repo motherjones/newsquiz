@@ -1,5 +1,4 @@
 
-
 .quiz_container {
     list-style-type: none;
 	font-weight: bold;
@@ -8,8 +7,8 @@
 }
 
 /*fluid grid layout using twitter bootstrap */
+
 .row-fluid {
-	width: 50%;
 	margin-left: 0 !important;
 }
 
