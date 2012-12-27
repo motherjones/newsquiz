@@ -4,7 +4,9 @@
 
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. It's easy!
 
-[Demo](#)
+[Basic Demo](http://motherjones.github.com/newsquiz/index-basic.html)
+
+[Advanced Demo](http://motherjones.github.com/newsquiz/index-advanced.html)
 
 ### Like how easy?
 
@@ -64,7 +66,7 @@ Load your index.html page in a browser, and check it out! **Pretty rad!**
 
 Want to mix pictures and video into your questions and answers? Want to add an extra title to some of your answers, but not all? We've included lots of flexible features.
 
-See a demo of an advanced quiz with extra bells and whistles [here](#). The spreadsheet driving this advanced demo is [here](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0).
+See a demo of an advanced quiz with extra bells and whistles [here](http://motherjones.github.com/newsquiz/index-advanced.html). The spreadsheet driving this advanced demo is [here](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0).
 
 ### Reference
 
@@ -136,8 +138,6 @@ You can pass that in as an argument instead of a Google Spreadsheet key, if you 
 **Empty tables are trouble.** We can't get column names from them (c'mon, Google!), so don't be too confused when a table with 0 rows is coming back with an empty `.column_names` or your code starts throwing weird errors when processing the results.
 
 ## NewsQuiz.js in the wild
-
-**The more examples the better, right?** Feel free to fork or contact me if you have a good example of something you've done.
 
 Coming soon.
 
