@@ -10,6 +10,8 @@
 
 ### Like how easy?
 
+Uses Tabletop, Bootstrap, jQuery, and Google Spreadsheets to make this possible: 
+
     <div id="quiz_container"></div>
 
 	<script>
