@@ -4,17 +4,19 @@
     list-style-type: none;
 	font-weight: bold;
 	color: #21252E;
-	width: 630px;
+	width: 98%;
 }
 
 /*fluid grid layout using twitter bootstrap */
 .row-fluid {
-	width: 100%;
+	width: 50%;
+	margin-left: 0 !important;
 }
 
 .span12 {
 	padding: .75em;
 	margin-top: .75em;
+	margin-left: 0 !important;
 }
 
 .span12.question {
@@ -62,7 +64,7 @@
 .quiz_container .revealed_answer p {
 	font-size: 1em;
 	line-height: 1.5em;
-	padding: 1em 0 0 0;
+	padding: 0em 0 0 0;
 	margin: 0;
 	min-height: 8em;
 
