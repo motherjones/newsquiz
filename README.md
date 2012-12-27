@@ -4,7 +4,7 @@
 
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. It's easy!
 
-[Demo](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
+[Demo](#)
 
 ### Like how easy?
 
@@ -41,20 +41,20 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 Try the following, substituting your URL for `public_spreadsheet_url`
 
 		<html>
-		    <head>
-		        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-		        <script src="js/tabletop.js"></script>
-		        <script src="js/GDoc-Powered-Quiz.min.js"></script>      
-		        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-		        <link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
-		        <link href="css/style.css" rel="stylesheet" media="screen">
-		    </head>
-		    <body>
-		        <div id="quiz_container"></div>
-		        <script type="text/javascript">
-		                var quiz = jQuery('#quiz_container').quiz('0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc');
-		        </script>
-		    </body>
+		<head>
+			<script src="js/jquery.js"></script>
+			<script src="js/tabletop.js"></script>
+			<script src="js/newsquiz.min.js"></script>      
+			<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+			<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+			<link href="css/style.css" rel="stylesheet" media="screen">
+		</head>
+		<body>
+			<div id="quiz_container"></div>
+				<script type="text/javascript">
+					var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url');
+				</script>
+		</body>
 		</html>
 
 Load your index.html page in a browser, and check it out! **Pretty rad!** 
@@ -64,11 +64,11 @@ Load your index.html page in a browser, and check it out! **Pretty rad!**
 
 Want to mix pictures and video into your questions and answers? Want to add an extra title to some of your answers, but not all? We've included lots of flexible features.
 
-See a demo of an advanced quiz with extra bells and whistles [here](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0). The spreadsheet driving this advanced demo is [here](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0).
+See a demo of an advanced quiz with extra bells and whistles [here](#). The spreadsheet driving this advanced demo is [here](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0).
 
 ### Reference
 
-Add **question**, **answer**, **right**, or **wrong** before any of these options in your column headers to apply to the right portion of your quiz item. See the [demo](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0) to see these options in action. You don't have to include all of these values for each item; see the section on Defaulting below.
+Add **question**, **answer**, **right**, or **wrong** before any of these options in your column headers to apply to the right portion of your quiz item. See the [demo spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc#gid=0) to see these options in action. You don't have to include all of these values for each item; see the section on Defaulting below.
 
 `title` is the headline of each item.
 
