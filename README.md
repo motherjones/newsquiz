@@ -177,4 +177,4 @@ Note that the `phantomjs` executable needs to be in the system `PATH` for grunt 
 
 [Jaeah Lee](http://twitter.com/jeaahjlee) designed it and implemented the fluid layout.
 
-[Tasneem Raja](http://twitter.com/tasneemraja), who headbangs to _Fleetwood Mac 'Rhiannon'_ while writing documentation, edited it.
+[Tasneem Raja](http://twitter.com/tasneemraja), who headbangs to Fleetwood Mac _Rhiannon_ while writing documentation, edited it.
