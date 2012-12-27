@@ -112,6 +112,8 @@
 
 .quiz_container img, .quiz_container .youtube {
 	margin-bottom: 1em;
+	min-height: 200px;
+	max-height: 200px;
 }
 
 .quiz_container .possible_answer img {
