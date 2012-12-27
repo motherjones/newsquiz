@@ -173,8 +173,8 @@ Note that the `phantomjs` executable needs to be in the system `PATH` for grunt 
 
 ## Credits
 
-[Ben Breedlove](http://twitter.com/bdbreedlove), TK he built it.
+[Ben Breedlove](http://twitter.com/bdbreedlove) built it.
 
-[Jaeah Lee](http://twitter.com/jeaahjlee), TK she designed and implemented fluid layout.
+[Jaeah Lee](http://twitter.com/jeaahjlee) designed it and implemented the fluid layout.
 
-[Tasneem Raja](http://twitter.com/tasneemraja), who headbangs to Fleetwood Mac 'Rhiannon' while writing documentation.
+[Tasneem Raja](http://twitter.com/tasneemraja), who headbangs to _Fleetwood Mac 'Rhiannon'_ while writing documentation, edited it.
