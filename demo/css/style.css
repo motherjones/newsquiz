@@ -10,11 +10,13 @@
 /*fluid grid layout using twitter bootstrap */
 .row-fluid {
 	width: 50%;
+	margin-left: 0 !important;
 }
 
 .span12 {
 	padding: .75em;
 	margin-top: .75em;
+	margin-left: 0 !important;
 }
 
 .span12.question {
