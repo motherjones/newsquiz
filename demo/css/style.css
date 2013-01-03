@@ -124,7 +124,7 @@
     display: block;
 }
 
-.quiz_container .youtube {
+.videoembed {
     position: relative;
     padding-bottom: 56.25%;
     padding-top: 30px;
@@ -132,7 +132,7 @@
     overflow: hidden;
 }
 
-.quiz_container .youtube iframe, .youtube object, .youtube embed {
+.videoembed iframe, .videoembed object, .videoembed embed {
     position: absolute;
     top: 0;
     left: 0;
