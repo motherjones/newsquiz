@@ -15,7 +15,7 @@
         var correct_answers_element;
 
         var quiz = {
-			defaulting_behavior_on : false,
+			defaulting_behavior_on : true,
             defaulting_flag : '!default',
 			container : 'quiz_container',
             init : function(quiz_data, options) {
@@ -302,7 +302,7 @@
             ],
             add_display_in_correct_place: function(container, place_in_display_values, slide) {
                 for ( var i = place_in_display_values; i > 0; i-- ) {
-                    if (container.find('.' + self.possible_display_values[i - 1]) ) {
+					if (container.find('.' + self.possible_display_values[i - 1]).length ) {
                         container.find('.' + self.possible_display_values[i - 1])
                             .after( self.create_display_element(
                                         self.possible_display_values[place_in_display_values],
@@ -322,7 +322,6 @@
             create_display_element: function( type, slide ) {
                 switch (type) {
                     case 'backgroundimage':
-                        //FIXME OH crap this isn't an element why do I hate myself
                         return ( slide[type] 
                                 ? '<div class="' + type + '" style="background-image: url(\'' 
                                     + slide[type] + '\'); height: 100%; width: 100%;position:absolute;z-index: -1"></div>'
