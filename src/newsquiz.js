@@ -15,7 +15,9 @@
         var correct_answers_element;
 
         var quiz = {
-            container : 'quiz_container',
+			defaulting_behavior_on : false,
+            defaulting_flag : '!default',
+			container : 'quiz_container',
             init : function(quiz_data, options) {
 
                 self = this;
@@ -24,6 +26,8 @@
                         self[option] = options[option];
                     }
                 }
+
+				
 
                 if (typeof(quiz_data) === 'string') {
                     //is a google spreadsheet
@@ -91,16 +95,23 @@
 
             pull_answer_value_from_spreadsheet : function(row, value, wrong_number, correct) {
                 var correct = correct ? 'right' : 'wrong';
-                return (row[correct + wrong_number + value]
-                        ?  row[correct + wrong_number + value]
-                        : (row[correct + value]
-                               ? row[correct + value]
-                               : ( row['answer' + value]
-                                    ? row['answer' + value]
-                                    : row['question' + value]
-                                 )
-                           )
-                    );
+				if (row[correct + wrong_number + value] && row[correct + wrong_number + value] !== self.defaulting_flag) {
+					return (row[correct + wrong_number + value]);					
+				}
+				
+				if (   (self.defaulting_behavior_on && row[correct + wrong_number + value] !== self.defaulting_flag) 				
+                	|| (!self.defaulting_behavior_on && row[correct + wrong_number + value] === self.defaulting_flag) 
+				) {
+					return (row[correct + value] && row[correct + value] !== self.defaulting_flag
+                               	? row[correct + value]
+                               	: (row['answer' + value] && row['answer' + value] !== self.defaulting_flag
+                                    	? row['answer' + value]
+                                    	: row['question' + value]
+                                  )
+                    		);
+				} else {
+					return '';
+				}
             },
             find_aspectratio: function(videoembed) {
 				var height = videoembed.match(/height="\d+"/);
