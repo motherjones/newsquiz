@@ -208,50 +208,55 @@
                         + '"></li>'
                 );
                 question_container.append( self.build_question_element_from_row(question_data) );
-                question_container.append( self.build_revealed_answer_element_from_row(question_data) );
+                //question_container.append( self.build_revealed_answer_element_from_row(question_data) );
                 question_container.append( self.build_possible_answer_elements_from_row(question_data, question_index) );
                 container_elem.append(question_container);
             },
             build_question_element_from_row: function(row) {
                 return jQuery('<div class="question span12 show" '
+                        + ( row.question.backgroundimage 
+                            ? 'style="background-image: url(\'' + slide.backgroundimage + '\');">' 
+                            : '>' )
                         + self.create_slide_guts(row.question)
                     + '</div>');
             },
+            /*
             build_revealed_answer_element_from_row: function(row) {
               var revealed_answers_container = jQuery('<div class="revealed_answers_container_' + row.rowNumber + '"></div>');
               for ( var i = 0; i < row.possible_answers.length; i++) {
                   revealed_answers_container.append(
                           jQuery('<div class="revealed_answer_' + i
                               + ' revealed_answer span12 hide" '
+                              + ( slide.backgroundimage 
+                                    ? 'style="background-image: url(\'' + slide.backgroundimage + '\');">' 
+                                    : '>' )
                               + self.create_slide_guts(row.possible_answers[i])
                               + '</div>')
                           );
               }
               return revealed_answers_container;
             },
+            */
             create_slide_guts : function(slide) {
-                return ( slide.backgroundimage 
-                            ? 'style="background-image: url(\'' + slide.backgroundimage + '\');">' 
-                            : '>' )
-                    + ( slide.topimage 
+                return ( slide.topimage 
                             ? '<img src="' + slide.topimage + '" class="topimage"></img>' 
                             : ''  )
                     + ( slide.topaspectratio 
-                            ? '<div class="videoembed" style="padding-bottom:' + slide.topaspectratio + '%">' + slide.topvideoembed + '</div>'
+                            ? '<div class="videoembed topvideoembed" style="padding-bottom:' + slide.topaspectratio + '%">' + slide.topvideoembed + '</div>'
                             : ''  )
                     + ( slide.title 
-                            ? '<h1>' + slide.title + '</h1>' 
+                            ? '<h1 class="slide_title">' + slide.title + '</h1>' 
                             : ''  )
                    	+ ( slide.middleimage 
 		                    ? '<img src="' + slide.middleimage + '" class="middleimage"></img>' 
                             : ''  )                    
                     + ( slide.middleaspectratio 
-                            ? '<div class="videoembed" style="padding-bottom:' + slide.middleaspectratio + '%">' + slide.middlevideoembed + '</div>'
+                            ? '<div class="videoembed middlevideoembed" style="padding-bottom:' + slide.middleaspectratio + '%">' + slide.middlevideoembed + '</div>'
                             : ''  )
                     + ( slide.subhed 
-                            ? '<h2>' + slide.subhed + '</h2>' 
+                            ? '<h2 class="slide_subhed">' + slide.subhed + '</h2>' 
                             : ''  )
-					+ '<p>' + slide.text + '</p>'
+					+ '<p class="slide_text">' + slide.text + '</p>'
                     + ( slide.bottomimage 
                             ? '<img src="' + slide.bottomimage + '" class="topimage"></img>' 
                             : ''  )
@@ -271,10 +276,22 @@
                         + '</li>');
                     (function(question_index, answer_index, possible_answer) {
                         possible_answer.bind('click', function() {
+                            // was it the right answer?
+                            var was_correct = self.quiz_data[question_index].possible_answers[answer_index].correct;
+
+                            // Add correct classes to possible answers
                             answers_container.find('.selected').removeClass('selected');
                             $(this).addClass('selected');
                             $(this).removeClass('possible_answer');
-                            var was_correct = self.quiz_data[question_index].possible_answers[answer_index].correct;
+                            answers_container
+                                .find('.answer_' + answer_index)
+                                .addClass( 
+                                    was_correct
+                                        ? 'correct_answer'
+                                        : 'wrong_answer'
+                                );
+
+                            //track how many you got right the first time
                             if ( typeof(answer_tracking[question_index]) === 'undefined' ) {
                                 answer_tracking[question_index] = was_correct;
                                 self.update_correct_answers_element();
@@ -286,35 +303,79 @@
                                       )
                                 );
                             }
-                            answers_container
-                                .find('.answer_' + answer_index)
-                                .addClass( 
-                                    was_correct
-                                        ? 'correct_answer'
-                                        : 'wrong_answer'
-                                );
-                            self.display_answer(question_index, answer_index, was_correct);
+
+                            //show new slide
+                            self.display_answer(self.quiz_data[question_index], question_index, self.quiz_data[question_index].possible_answers[answer_index]);
+                            
+                            // track that this was selected last
+                            self.quiz_data[question_index].previously_selected = self.quiz_data[question_index].possible_answers[answer_index];
                         });
                     })(question_index, i, possible_answer);
                     answers_container.append(possible_answer);
                 }
                 return answers_container;
             },
-            display_answer : function(question_index, answer_index, was_correct) {
-                container_elem
-                    .find('.question_' + question_index + ' .question').
-                    removeClass('show')
-                    .addClass('hide');
-                container_elem
-                    .find('.question_' + question_index + ' .revealed_answer').
-                    removeClass('show')
-                    .addClass('hide');
 
-                container_elem
-                    .find('.question_' + question_index + ' .revealed_answer_' + answer_index).
-                    removeClass('hide')
-                    .addClass('show');
+            possible_display_values  : [
+                'backgroundimage',
+                'topimage',
+                'topvideoembed',
+                'title',
+                'middleimage',
+                'middlevideoembed',
+                'subhed',
+                'text',
+                'bottomimage',
+                'bottomvideoembed'
+            ],
+            display_answer : function(question, question_index, answer) {
+                var displayed_slide = question.previously_selected
+                    ? question.previously_selected
+                    : question.question;
+                var slide = container_elem.find('.question_' + question_index + ' .question');
+                slide.addClass('revealed_answer');
+                for (var i = 0; i < self.possible_display_values.length; i++) {
+                    var display_value = self.possible_display_values[i];
+                    if ( answer[display_value] !== displayed_slide[display_value] ) {
+                        switch (display_value) {
+                            case 'backgroundimage':
+                                slide.css('background-image', 'url(\'' + answer.backgroundimage + '\')' );
+                                break;
+                            case 'topimage':
+                                slide.find('.topimage').attr('src', answer[display_value]);
+                                break;
+                            case 'topvideoembed':
+                                slide.find('.topvideoembed').css('padding-bottom', answer['topaspectratio'] + '%');
+                                slide.find('.topvideoembed').html(answer[display_value]);
+                                break;
+                            case 'title':
+                                slide.find('.slide_title').html(answer[display_value]);
+                                break;
+                            case 'middleimage':
+                                slide.find('.middleimage').attr('src', answer[display_value]);
+                                break;
+                            case 'middlevideoembed':
+                                slide.find('.middlevideoembed').css('padding-bottom', answer['middleaspectratio'] + '%');
+                                slide.find('.middlevideoembed').html(answer[display_value]);
+                                break;
+                            case 'subhed':
+                                slide.find('.slide_subhed').html(answer[display_value]);
+                                break;
+                            case 'text':
+                                slide.find('.slide_text').html(answer[display_value]);
+                                break;
+                            case 'bottomimage':
+                                slide.find('.bottomimage').attr('src', answer[display_value]);
+                                break;
+                            case 'bottomvideoembed':
+                                slide.find('.bottomvideoembed').css('padding-bottom', answer['bottomaspectratio'] + '%');
+                                slide.find('.bottomvideoembed').html(answer[display_value]);
+                                break;
+                        }
+                    }
+                }
             },
+
             create_cover : function() {
                 cover = $('#' + self.container);
                 container_elem = jQuery('<ul></ul>');
