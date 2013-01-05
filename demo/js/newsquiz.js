@@ -1,4 +1,4 @@
-/*! newsquiz - v0.1.0 - 2013-01-03
+/*! newsquiz - v0.1.0 - 2013-01-04
 * https://github.com/motherjones/newsquiz
 * Copyright (c) 2013 Ben Breedlove; Licensed MIT, GPL */
 
@@ -11,7 +11,9 @@
         var correct_answers_element;
 
         var quiz = {
-            container : 'quiz_container',
+			defaulting_behavior_on : true,
+            defaulting_flag : '!default',
+			container : 'quiz_container',
             init : function(quiz_data, options) {
 
                 self = this;
@@ -20,6 +22,8 @@
                         self[option] = options[option];
                     }
                 }
+
+				
 
                 if (typeof(quiz_data) === 'string') {
                     //is a google spreadsheet
@@ -87,16 +91,23 @@
 
             pull_answer_value_from_spreadsheet : function(row, value, wrong_number, correct) {
                 var correct = correct ? 'right' : 'wrong';
-                return (row[correct + wrong_number + value]
-                        ?  row[correct + wrong_number + value]
-                        : (row[correct + value]
-                               ? row[correct + value]
-                               : ( row['answer' + value]
-                                    ? row['answer' + value]
-                                    : row['question' + value]
-                                 )
-                           )
-                    );
+				if (row[correct + wrong_number + value] && row[correct + wrong_number + value] !== self.defaulting_flag) {
+					return (row[correct + wrong_number + value]);					
+				}
+				
+				if (   (self.defaulting_behavior_on && row[correct + wrong_number + value] !== self.defaulting_flag) 				
+                	|| (!self.defaulting_behavior_on && row[correct + wrong_number + value] === self.defaulting_flag) 
+				) {
+					return (row[correct + value] && row[correct + value] !== self.defaulting_flag
+                               	? row[correct + value]
+                               	: (row['answer' + value] && row['answer' + value] !== self.defaulting_flag
+                                    	? row['answer' + value]
+                                    	: row['question' + value]
+                                  )
+                    		);
+				} else {
+					return '';
+				}
             },
             find_aspectratio: function(videoembed) {
 				var height = videoembed.match(/height="\d+"/);
@@ -209,56 +220,17 @@
                 container_elem.append(question_container);
             },
             build_question_element_from_row: function(row) {
-                return jQuery('<div class="question span12 show" '
-                        + ( row.question.backgroundimage 
-                            ? 'style="background-image: url(\'' + slide.backgroundimage + '\');">' 
-                            : '>' )
+                return jQuery('<div class="question span12 show" style="overflow: hidden; position: relative;"> '
                         + self.create_slide_guts(row.question)
                     + '</div>');
             },
-            /*
-            build_revealed_answer_element_from_row: function(row) {
-              var revealed_answers_container = jQuery('<div class="revealed_answers_container_' + row.rowNumber + '"></div>');
-              for ( var i = 0; i < row.possible_answers.length; i++) {
-                  revealed_answers_container.append(
-                          jQuery('<div class="revealed_answer_' + i
-                              + ' revealed_answer span12 hide" '
-                              + ( slide.backgroundimage 
-                                    ? 'style="background-image: url(\'' + slide.backgroundimage + '\');">' 
-                                    : '>' )
-                              + self.create_slide_guts(row.possible_answers[i])
-                              + '</div>')
-                          );
-              }
-              return revealed_answers_container;
-            },
-            */
             create_slide_guts : function(slide) {
-                return ( slide.topimage 
-                            ? '<img src="' + slide.topimage + '" class="topimage"></img>' 
-                            : ''  )
-                    + ( slide.topaspectratio 
-                            ? '<div class="videoembed topvideoembed" style="padding-bottom:' + slide.topaspectratio + '%">' + slide.topvideoembed + '</div>'
-                            : ''  )
-                    + ( slide.title 
-                            ? '<h1 class="slide_title">' + slide.title + '</h1>' 
-                            : ''  )
-                   	+ ( slide.middleimage 
-		                    ? '<img src="' + slide.middleimage + '" class="middleimage"></img>' 
-                            : ''  )                    
-                    + ( slide.middleaspectratio 
-                            ? '<div class="videoembed middlevideoembed" style="padding-bottom:' + slide.middleaspectratio + '%">' + slide.middlevideoembed + '</div>'
-                            : ''  )
-                    + ( slide.subhed 
-                            ? '<h2 class="slide_subhed">' + slide.subhed + '</h2>' 
-                            : ''  )
-					+ '<p class="slide_text">' + slide.text + '</p>'
-                    + ( slide.bottomimage 
-                            ? '<img src="' + slide.bottomimage + '" class="topimage"></img>' 
-                            : ''  )
-                    + ( slide.bottomaspectratio 
-                            ? '<div class="videoembed" style="padding-bottom:' + slide.bottomaspectratio + '%">' + slide.bottomvideoembed + '</div>'
-                            : ''  );
+                var guts = '';
+                for (var i = 0; i < self.possible_display_values.length; i++) {
+                    var display_value = self.possible_display_values[i];
+                    guts += self.create_display_element(display_value, slide)
+                }
+                return guts;
             },
             build_possible_answer_elements_from_row : function(question, question_index) {
                 var answers_container = jQuery('<ul class="span12 possible_answers possible_answers_'
@@ -324,6 +296,78 @@
                 'bottomimage',
                 'bottomvideoembed'
             ],
+            add_display_in_correct_place: function(container, place_in_display_values, slide) {
+                for ( var i = place_in_display_values; i > 0; i-- ) {
+					if (container.find('.' + self.possible_display_values[i - 1]).length ) {
+                        container.find('.' + self.possible_display_values[i - 1])
+                            .after( self.create_display_element(
+                                        self.possible_display_values[place_in_display_values],
+                                        slide
+                                    ) 
+                            );
+                        return;
+                    }
+                }
+                container.prepend( 
+                    self.create_display_element(
+                        self.possible_display_values[place_in_display_values], 
+                        slide
+                    ) 
+                );
+            },
+            create_display_element: function( type, slide ) {
+                switch (type) {
+                    case 'backgroundimage':
+                        return ( slide[type] 
+                                ? '<div class="' + type + '" style="background-image: url(\'' 
+                                    + slide[type] + '\'); height: 100%; width: 100%;position:absolute;z-index: -1"></div>'
+                                : '');
+                        break;
+                    case 'topimage':
+                       return ( slide[type] 
+                            ? '<img src="' + slide[type] + '" class="' + type + '"></img>' 
+                            : ''  );
+                        break;
+                    case 'topvideoembed':
+                        return ( slide.topaspectratio 
+                            ? '<div class="videoembed ' + type + '" style="padding-bottom:' + slide.topaspectratio + '%">' + slide[type] + '</div>'
+                            : ''  );
+                    break;
+                    case 'title':
+                        return ( slide[type] 
+                                ? '<h1 class="' + type + '">' + slide[type] + '</h1>' 
+                                : ''  );
+                        break;
+                    case 'middleimage':
+                        return ( slide[type] 
+                                ? '<img src="' + slide[type] + '" class="' + type + '"></img>' 
+                                : ''  );                   
+                        break;
+                    case 'middlevideoembed':
+                        return ( slide.middleaspectratio 
+                                ? '<div class="videoembed ' + type + '" style="padding-bottom:' + slide.middleaspectratio + '%">' + slide[type] + '</div>'
+                                : ''  );
+                        break;
+                    case 'subhed':
+                        return ( slide[type] 
+                                ? '<h2 class="' + type +'">' + slide[type] + '</h2>' 
+                                : ''  );
+                        break;
+                    case 'text':
+                        return '<p class="' + type + '">' + slide[type] + '</p>'
+                        break;
+                    case 'bottomimage':
+                        return ( slide[type] 
+                                ? '<img src="' + slide[type] + '" class="' + type + '"></img>' 
+                                : ''  );
+                        break;
+                    case 'bottomvideoembed':
+                        return ( slide.bottomaspectratio 
+                                ? '<div class="videoembed" style="padding-bottom:' + slide.bottomaspectratio + '%">' + slide[type] + '</div>'
+                                : ''  );
+                        break;
+                }
+            },
             display_answer : function(question, question_index, answer) {
                 var displayed_slide = question.previously_selected
                     ? question.previously_selected
@@ -332,41 +376,20 @@
                 slide.addClass('revealed_answer');
                 for (var i = 0; i < self.possible_display_values.length; i++) {
                     var display_value = self.possible_display_values[i];
-                    if ( answer[display_value] !== displayed_slide[display_value] ) {
-                        switch (display_value) {
-                            case 'backgroundimage':
-                                slide.css('background-image', 'url(\'' + answer.backgroundimage + '\')' );
-                                break;
-                            case 'topimage':
-                                slide.find('.topimage').attr('src', answer[display_value]);
-                                break;
-                            case 'topvideoembed':
-                                slide.find('.topvideoembed').css('padding-bottom', answer['topaspectratio'] + '%');
-                                slide.find('.topvideoembed').html(answer[display_value]);
-                                break;
-                            case 'title':
-                                slide.find('.slide_title').html(answer[display_value]);
-                                break;
-                            case 'middleimage':
-                                slide.find('.middleimage').attr('src', answer[display_value]);
-                                break;
-                            case 'middlevideoembed':
-                                slide.find('.middlevideoembed').css('padding-bottom', answer['middleaspectratio'] + '%');
-                                slide.find('.middlevideoembed').html(answer[display_value]);
-                                break;
-                            case 'subhed':
-                                slide.find('.slide_subhed').html(answer[display_value]);
-                                break;
-                            case 'text':
-                                slide.find('.slide_text').html(answer[display_value]);
-                                break;
-                            case 'bottomimage':
-                                slide.find('.bottomimage').attr('src', answer[display_value]);
-                                break;
-                            case 'bottomvideoembed':
-                                slide.find('.bottomvideoembed').css('padding-bottom', answer['bottomaspectratio'] + '%');
-                                slide.find('.bottomvideoembed').html(answer[display_value]);
-                                break;
+                    // If things don't change when they should, consider !== here first
+                    if ( answer[display_value] != displayed_slide[display_value] ) {
+                        if ( !answer[display_value] ) {
+                            // FIXME abstract the classes we add
+                            slide.find('.' + display_value).remove();
+                            //remove thing
+                        } else if ( !displayed_slide[display_value] ) {
+                            //place in display values is i, here
+                            self.add_display_in_correct_place(slide, i, answer);
+                        } else {
+                            //replace thign
+                            slide.find('.' + display_value).before(jQuery(
+                                        self.create_display_element( display_value, answer )
+                                )).remove();
                         }
                     }
                 }
