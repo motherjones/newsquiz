@@ -108,6 +108,27 @@ While this makes writing the quiz significantly less tedious, this does mean tha
 
 If you do you will find yourself in the ugly position of having multiple images all over your answer. Yuck.
 
+**How to Turn Off Defaulting**
+
+There are two ways to do it.
+
+1) To turn off defaulting for the entire quiz: In your project, add an options object as the second argument in your call to create the quiz. In the options argument, have the key `defaulting_behavior_on` set to `false`.
+
+```
+var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url', {defaulting_behavior_on : false});
+
+```
+
+2) To turn off defaulting for a single cell in your spreadsheet (or JSON), or turn on defaulting for a single cell if you've turned off defaulting for the whole quiz, simply enter the value `!default`. In other words, `!default` operates like a switch that enables or disables defaulting for a single cell depending on the defaulting status of your entire quiz.
+
+If you don't care for the term `!default`, you can change the flag like so:
+
+```
+var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url', {defaulting_flag : 'REPLACE !DEFAULT HERE'});
+
+```
+
+
 ## Writing your quiz in JSON
 
 Writing your quiz in JSON is supported, though discouraged if you don't know JSON. The quiz object is formed like this:
