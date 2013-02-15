@@ -33,7 +33,8 @@
 }
 
 .quiz_container .question_container h1 {
-	font-size: 2.5em;
+	font-size: 1em;
+    font-weight: bold;
 }
 
 .quiz_container .question p {
