@@ -25,7 +25,7 @@
 /*additional custom styling*/
 
 .quiz_container .question_container {
-	margin: 3em 0em;
+	margin: 1em 0em 6em;
 }
 
 .quiz_container .question_container h1, .question p, .revealed_answer p {
@@ -68,11 +68,12 @@
 /*more styling for answers*/
 
 .quiz_container .revealed_answer p {
-	font-size: 1em;
+	font-size: 1.2em;
 	line-height: 1.5em;
 	padding: 0em 0 0 0;
 	margin: 0;
 	min-height: 3em;
+	font-weight: normal;
 
 }
 
