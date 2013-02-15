@@ -18,6 +18,152 @@
 			defaulting_behavior_on : true,
             defaulting_flag : '!default',
 			container : 'quiz_container',
+            possible_display_elements  : [
+                { 
+                    name : 'backgroundimage',
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    create_element : function(slide) {
+                        if (!slide[this.name]) {return '';}
+                        return jQuery('<div class="' 
+                            + this.name 
+                            + '" style="background-image: url(\'' 
+                            + slide[this.name] 
+                            + '\'); height: 100%; width: 100%;position:absolute;z-index: -1"></div>'
+                        );
+                    } 
+                },
+                { 
+                    name : 'topimage',
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    create_element : function(slide) {
+                        if (!slide[this.name]) {return '';}
+                        return jQuery(
+                                '<img src="' + slide[this.name] 
+                                + '" class="' + this.name + '"></img>' 
+                        );
+                    } 
+                },
+                { 
+                    name : 'topvideoembed',
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    needs_aspect_ratio : true,
+                    create_element : function(slide) {
+                         //check aspect ratio
+                        if (!slide.topvideoembedaspectratio) {return '';}
+                        return jQuery('<div class="videoembed ' + this.name 
+                            + '" style="padding-bottom:' 
+                            + slide.topvideoembedaspectratio + '%">' 
+                            + slide[this.name] + '</div>'
+                        );
+                    } 
+                },
+                { 
+                    name : 'title',
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    create_element : function(slide) {
+                        if (!slide[this.name]) {return '';}
+                        return jQuery('<h1 class="' + this.name + '">' 
+                            + slide[this.name] + '</h1>' 
+                        );
+                    } 
+                },
+                { 
+                    name : 'middleimage',
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    create_element : function(slide) {
+                        if (!slide[this.name]) {return '';}
+                        return jQuery(
+                                '<img src="' + slide[this.name] 
+                                + '" class="' + this.name + '"></img>' 
+                        );
+                    } 
+                },
+                { 
+                    name : 'middlevideoembed',
+                    needs_aspect_ratio : true,
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    create_element : function(slide) {
+                         //check aspect ratio
+                        if (!slide.middlevideoembedaspectratio) {return '';}
+                        return jQuery('<div class="videoembed ' + this.name 
+                            + '" style="padding-bottom:' 
+                            + slide.middlevideoembedaspectratio + '%">' 
+                            + slide[this.name] + '</div>'
+                        );
+                    } 
+                },
+                { 
+                    name : 'subhed',
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    create_element : function(slide) {
+                        if (!slide[this.name]) {return '';}
+                        return jQuery('<h2 class="'
+                            + this.name 
+                            + '">'
+                            + slide[this.name] 
+                            + '</h2>'
+                        );
+                    } 
+                },
+                { 
+                    name : 'text',
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    create_element : function(slide) {
+                        if (!slide[this.name]) {return '';}
+                        return jQuery('<p class="' 
+                            + this.name 
+                            + '">'
+                            + slide[this.name] 
+                            + '</p>'
+                        );
+                    } 
+                },
+                { 
+                    name : 'bottomimage',
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    create_element : function(slide) {
+                        if (!slide[this.name]) {return '';}
+                        return jQuery('<img src="' + slide[this.name] 
+                            + '" class="' + this.name + '"></img>' 
+                        );
+                    } 
+                },
+                { 
+                    name : 'bottomvideoembed',
+                    needs_aspect_ratio : true,
+                    finder: function(container) {
+                        return container.find('.' + this.name);
+                    },
+                    create_element : function(slide) {
+                         //check aspect ratio
+                        if (!slide.bottomvideoembedaspectratio) {return '';}
+                        return jQuery('<div class="videoembed ' + this.name 
+                            + '" style="padding-bottom:' 
+                            + slide.bottomvideoembedaspectratio + '%">' 
+                            + slide[this.name] + '</div>'
+                        );
+                    } 
+                },
+            ],
+
             init : function(quiz_data, options) {
 
                 self = this;
@@ -26,8 +172,6 @@
                         self[option] = options[option];
                     }
                 }
-
-				
 
                 if (typeof(quiz_data) === 'string') {
                     //is a google spreadsheet
@@ -72,8 +216,6 @@
 			calculate_aspectratios: function(data) {
 				for (var i = 0; i < data.length; i++) {
 					var row = data[i];
-
-
                     for (var k = 0; k < row.possible_answers.length; k++) {
                         var answer = row.possible_answers[k];
                         self.find_aspectratio_for_each_type_of_video_embed(answer);
@@ -84,15 +226,31 @@
 			},
 
             find_aspectratio_for_each_type_of_video_embed : function(slide) {
-				var types_of_video_embeds = ['top', 'middle', 'bottom'];
-                for (var i = 0; i < types_of_video_embeds.length; i++) {
-                    if ( slide[types_of_video_embeds[i] + 'videoembed'] ) {
-                        slide[types_of_video_embeds[i] + 'aspectratio'] 
-                            = self.find_aspectratio(slide[types_of_video_embeds[i] + 'videoembed']);
+                for (var i = 0; i < self.possible_display_elements.length; i++ ) {
+                    var display = self.possible_display_elements[i];
+                    if ( display.needs_aspect_ratio && slide[display.name] ) {
+                        slide[display.name + 'aspectratio'] 
+                            = self.find_aspectratio(slide[display.name]);
                     }
                 }
             },
-
+            find_aspectratio: function(videoembed) {
+				var height = videoembed.match(/height="\d+"/);
+				if (!height || !height[0]) {
+					console.log('Your video embed code needs a height.');
+					return '';
+				};
+				height = parseInt(height[0].replace(/height="/, '').replace(/"/, ''));
+								
+				var width = videoembed.match(/width="\d+"/);
+				if (!width || !width[0]) {
+					console.log('Your video embed code needs a width.');
+					return '';
+				};
+				width = parseInt(width[0].replace(/width="/, '').replace(/"/, ''));
+			
+				return (height / width)*100;
+            },
             pull_answer_value_from_spreadsheet : function(row, value, wrong_number, correct) {
                 var correct = correct ? 'right' : 'wrong';
 				if (row[correct + wrong_number + value] && row[correct + wrong_number + value] !== self.defaulting_flag) {
@@ -113,23 +271,6 @@
 					return '';
 				}
             },
-            find_aspectratio: function(videoembed) {
-				var height = videoembed.match(/height="\d+"/);
-				if (!height[0]) {
-					console.log('Your video embed code needs a height.');
-					return;
-				};
-				height = parseInt(height[0].replace(/height="/, '').replace(/"/, ''));
-								
-				var width = videoembed.match(/width="\d+"/);
-				if (!width[0]) {
-					console.log('Your video embed code needs a width.');
-					return;
-				};
-				width = parseInt(width[0].replace(/width="/, '').replace(/"/, ''));
-			
-				return (height / width)*100;
-            },
             get_possible_answers : function(row, is_correct) {
                 var possible_answers = [];
                 var right_or_wrong = (is_correct ? 'right' : 'wrong');
@@ -143,23 +284,19 @@
                 }
                 return possible_answers;
             },
-            make_possible_answer: function(row, i, is_correct) {
+            make_possible_answer: function(row, row_number, is_correct) {
                 var right_or_wrong = (is_correct ? 'right' : 'wrong');
-                return {
-                    answer: row[right_or_wrong + i],
-                    correct: is_correct,
-                    title: self.pull_answer_value_from_spreadsheet(row, 'title', i, is_correct),
-                    subhed: self.pull_answer_value_from_spreadsheet(row, 'subhed', i, is_correct),
-                    text : self.pull_answer_value_from_spreadsheet(row, 'text', i, is_correct),
-                    topimage: self.pull_answer_value_from_spreadsheet(row, 'topimage', i, is_correct),
-					topvideoembed: self.pull_answer_value_from_spreadsheet(row, 'topvideoembed', i, is_correct),
-					middleimage: self.pull_answer_value_from_spreadsheet(row, 'middleimage', i, is_correct),
-					//youtube: self.pull_youtube_id(self.pull_answer_value_from_spreadsheet(row, 'youtube', i, is_correct)),
-					middlevideoembed: self.pull_answer_value_from_spreadsheet(row, 'middlevideoembed', i, is_correct),
-                    bottomimage: self.pull_answer_value_from_spreadsheet(row, 'bottomimage', i, is_correct),
-					bottomvideoembed: self.pull_answer_value_from_spreadsheet(row, 'bottomvideoembed', i, is_correct),
-                    backgroundimage: self.pull_answer_value_from_spreadsheet(row, 'backgroundimage', i, is_correct)
+                var answer = {
+                    answer: row[right_or_wrong + row_number],
+                    correct: is_correct
                 };
+                for (var i = 0; i < self.possible_display_elements.length; i++ ) {
+                    var display_element = self.possible_display_elements[i].name;
+                    answer[display_element] = self.pull_answer_value_from_spreadsheet(
+                        row, display_element, row_number, is_correct
+                    )
+                }
+                return answer;
             },
             make_quiz_data_from_spreadsheet_data: function(data) {
                 var quiz = [];
@@ -193,21 +330,14 @@
 
                     var question = {
                         question : {
-                                       title: row.questiontitle,
-                                       subhed: row.questionsubhed,
-                                       text : row.questiontext,
-                                       topimage: row.questiontopimage,
-                                       topvideoembed: row.questiontopvideoembed,
-									   middleimage: row.questionmiddleimage,
-                                       middlevideoembed: row.questionmiddlevideoembed,
-                                       bottomimage: row.questionbottomimage,
-                                       bottomvideoembed: row.questionbottomvideoembed,
-                                       backgroundimage: row.questionbackgroundimage
                         },
                         possible_answers : possible_answers,
                         rowNumber : row.rowNumber - 1
                     };
-                    //do stuff to turn data into quiz acceptable json
+                    for (var j = 0; j < self.possible_display_elements.length; j++) {
+                        var display_value = self.possible_display_elements[j].name;
+                        question.question[display_value] = row['question' + display_value];
+                    }
                     quiz.push(question);
                 }
                 return quiz;
@@ -219,22 +349,17 @@
                         + '"></li>'
                 );
                 question_container.append( self.build_question_element_from_row(question_data) );
-                //question_container.append( self.build_revealed_answer_element_from_row(question_data) );
                 question_container.append( self.build_possible_answer_elements_from_row(question_data, question_index) );
                 container_elem.append(question_container);
             },
             build_question_element_from_row: function(row) {
-                return jQuery('<div class="question span12 show" style="overflow: hidden; position: relative;"> '
-                        + self.create_slide_guts(row.question)
-                    + '</div>');
-            },
-            create_slide_guts : function(slide) {
-                var guts = '';
-                for (var i = 0; i < self.possible_display_values.length; i++) {
-                    var display_value = self.possible_display_values[i];
-                    guts += self.create_display_element(display_value, slide)
+                var question_container = jQuery('<div class="question span12 show" style="overflow: hidden; position: relative;"></div>');
+                for (var i = 0; i < self.possible_display_elements.length; i++) {
+                    question_container.append(
+                        self.possible_display_elements[i].create_element(row.question)
+                    );
                 }
-                return guts;
+                return question_container;
             },
             build_possible_answer_elements_from_row : function(question, question_index) {
                 var answers_container = jQuery('<ul class="span12 possible_answers possible_answers_'
@@ -287,90 +412,17 @@
                 }
                 return answers_container;
             },
-
-            possible_display_values  : [
-                'backgroundimage',
-                'topimage',
-                'topvideoembed',
-                'title',
-                'middleimage',
-                'middlevideoembed',
-                'subhed',
-                'text',
-                'bottomimage',
-                'bottomvideoembed'
-            ],
-            add_display_in_correct_place: function(container, place_in_display_values, slide) {
-                for ( var i = place_in_display_values; i > 0; i-- ) {
-					if (container.find('.' + self.possible_display_values[i - 1]).length ) {
-                        container.find('.' + self.possible_display_values[i - 1])
-                            .after( self.create_display_element(
-                                        self.possible_display_values[place_in_display_values],
-                                        slide
-                                    ) 
-                            );
+            add_display_in_correct_place: function(container, place_in_display_elements, slide) {
+                for ( var i = place_in_display_elements; i > 0; i-- ) {
+					if (self.possible_display_elements[i - 1].finder(container).length ) {
+                        self.possible_display_elements[i - 1].finder(container)
+                            .after( self.possible_display_elements[place_in_display_elements].create_element(slide) );
                         return;
                     }
                 }
                 container.prepend( 
-                    self.create_display_element(
-                        self.possible_display_values[place_in_display_values], 
-                        slide
-                    ) 
+                    self.possible_display_elements[place_in_display_elements].create_element(slide)
                 );
-            },
-            create_display_element: function( type, slide ) {
-                switch (type) {
-                    case 'backgroundimage':
-                        return ( slide[type] 
-                                ? '<div class="' + type + '" style="background-image: url(\'' 
-                                    + slide[type] + '\'); height: 100%; width: 100%;position:absolute;z-index: -1"></div>'
-                                : '');
-                        break;
-                    case 'topimage':
-                       return ( slide[type] 
-                            ? '<img src="' + slide[type] + '" class="' + type + '"></img>' 
-                            : ''  );
-                        break;
-                    case 'topvideoembed':
-                        return ( slide.topaspectratio 
-                            ? '<div class="videoembed ' + type + '" style="padding-bottom:' + slide.topaspectratio + '%">' + slide[type] + '</div>'
-                            : ''  );
-                    break;
-                    case 'title':
-                        return ( slide[type] 
-                                ? '<h1 class="' + type + '">' + slide[type] + '</h1>' 
-                                : ''  );
-                        break;
-                    case 'middleimage':
-                        return ( slide[type] 
-                                ? '<img src="' + slide[type] + '" class="' + type + '"></img>' 
-                                : ''  );                   
-                        break;
-                    case 'middlevideoembed':
-                        return ( slide.middleaspectratio 
-                                ? '<div class="videoembed ' + type + '" style="padding-bottom:' + slide.middleaspectratio + '%">' + slide[type] + '</div>'
-                                : ''  );
-                        break;
-                    case 'subhed':
-                        return ( slide[type] 
-                                ? '<h2 class="' + type +'">' + slide[type] + '</h2>' 
-                                : ''  );
-                        break;
-                    case 'text':
-                        return '<p class="' + type + '">' + slide[type] + '</p>'
-                        break;
-                    case 'bottomimage':
-                        return ( slide[type] 
-                                ? '<img src="' + slide[type] + '" class="' + type + '"></img>' 
-                                : ''  );
-                        break;
-                    case 'bottomvideoembed':
-                        return ( slide.bottomaspectratio 
-                                ? '<div class="videoembed" style="padding-bottom:' + slide.bottomaspectratio + '%">' + slide[type] + '</div>'
-                                : ''  );
-                        break;
-                }
             },
             display_answer : function(question, question_index, answer) {
                 var displayed_slide = question.previously_selected
@@ -378,22 +430,17 @@
                     : question.question;
                 var slide = container_elem.find('.question_' + question_index + ' .question');
                 slide.addClass('revealed_answer');
-                for (var i = 0; i < self.possible_display_values.length; i++) {
-                    var display_value = self.possible_display_values[i];
-                    // If things don't change when they should, consider !== here first
+                for (var i = 0; i < self.possible_display_elements.length; i++) {
+                    var display_value = self.possible_display_elements[i].name;
                     if ( answer[display_value] != displayed_slide[display_value] ) {
                         if ( !answer[display_value] ) {
-                            // FIXME abstract the classes we add
-                            slide.find('.' + display_value).remove();
-                            //remove thing
+                            self.possible_display_elements[i].finder(slide).remove();
                         } else if ( !displayed_slide[display_value] ) {
-                            //place in display values is i, here
                             self.add_display_in_correct_place(slide, i, answer);
                         } else {
-                            //replace thign
-                            slide.find('.' + display_value).before(jQuery(
-                                        self.create_display_element( display_value, answer )
-                                )).remove();
+                            self.possible_display_elements[i].finder(slide).before(
+                                self.possible_display_elements[i].create_element( answer )
+                            ).remove();
                         }
                     }
                 }
