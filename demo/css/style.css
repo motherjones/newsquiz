@@ -114,6 +114,17 @@
 	padding: 0;
 }
 
+.quiz_container .how_you_did {
+	text-align: center;
+	padding: 1em;
+	background-color: rgb(254, 231, 88);
+	font-weight: bold;
+	font-size: 1.25em;
+	-webkit-box-shadow: 0px 7px 5px rgba(50, 50, 50, 0.65);
+	-moz-box-shadow:    0px 7px 5px rgba(50, 50, 50, 0.65);
+	box-shadow:         0px 7px 5px rgba(50, 50, 50, 0.65);
+}
+
 /*multimedia styling*/
 
 .quiz_container img, .quiz_container .youtube {
