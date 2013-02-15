@@ -1,6 +1,6 @@
 
 .quiz_container {
-    list-style-type: none;
+    list-style-type: none !important;
 	font-weight: bold;
 	color: #21252E;
 	width: 98%;
@@ -58,6 +58,10 @@
 	color: #000;
 }
 
+.quiz_container li {
+	list-style-type: none !important;
+}
+
 /*more styling for answers*/
 
 .quiz_container .revealed_answer p {
@@ -71,6 +75,7 @@
 
 .quiz_container .revealed_answer a {
 	color: #E64522;
+	border-bottom: 0 !important;
 }
 
 .quiz_container .revealed_answer a:hover {
