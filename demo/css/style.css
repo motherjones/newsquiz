@@ -114,7 +114,7 @@
 	padding: 0;
 }
 
-.quiz_container .how_you_did {
+#quiz_container .how_you_did {
 	text-align: center;
 	padding: 1em;
 	background-color: rgb(254, 231, 88);

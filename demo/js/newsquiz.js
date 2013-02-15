@@ -194,7 +194,7 @@
                 var how_you_did_element = jQuery('<p class="how_you_did"></p>');
                 how_you_did_element.append(jQuery('<span>You got </span>'));
                 how_you_did_element.append(correct_answers_element);
-                how_you_did_element.append(jQuery('<span> correct answers out of ' + self.quiz_data.length + ' questions!</span>'));
+                how_you_did_element.append(jQuery('<span> correct answers out of ' + self.quiz_data.length + ' questions</span>'));
                 cover.append(how_you_did_element);
             },
 
