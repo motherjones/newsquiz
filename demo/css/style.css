@@ -159,3 +159,24 @@
     height: 100%;
     width: 100%;
 }
+
+/* media queries */
+
+@media (max-width: 480px) {
+	.quiz_container li {
+		font-size: 1em !important;
+	}
+		
+	.quiz_container .question_container h1 {
+		font-family: verdana, sans-serif;
+		font-size: 1.25em;
+	}
+	
+	.quiz_container .question img, .revealed_answer img {
+		display: none;
+	}
+
+	.quiz_container .question_container {
+		margin: 1em 0em 3.5em;
+	}
+}
