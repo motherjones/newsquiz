@@ -3,31 +3,33 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    pkg: '<json:newsquiz.jquery.json>',
-    meta: {
-      banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
-    },
+    pkg: grunt.file.readJSON('newsquiz.jquery.json'),
     concat: {
+      options: {
+        stripBanners: true,
+        banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+        '<%= grunt.template.today("yyyy-mm-dd") %> ' +
+        '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n'
+      },
       dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/<%= pkg.name %>.js>'],
+        src: 'src/<%= pkg.name %>.js',
         dest: 'demo/js/<%= pkg.name %>.js'
       }
     },
-    min: {
+    uglify: {
+      options: {
+        banner: '<%= concat.options.banner %>'
+      },
       dist: {
-        src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-        dest: 'demo/js/<%= pkg.name %>.min.js'
+        files: {
+          'demo/js/<%= pkg.name %>.min.js': '<%= concat.dist.dest %>'
+        }
       }
     },
     qunit: {
       files: ['test/**/*.html']
-    },
-    lint: {
-      files: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
     },
     watch: {
       files: '<config:lint.files>',
@@ -49,12 +51,17 @@ module.exports = function(grunt) {
       },
       globals: {
         jQuery: true
-      }
-    },
-    uglify: {}
+      },
+      all: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
+    }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+
   // Default task.
-  grunt.registerTask('default', 'lint qunit concat min');
+  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
 
 };
