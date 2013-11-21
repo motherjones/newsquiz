@@ -5,8 +5,9 @@
 (function($) {
 
     function make_default_how_you_did_html(nCorrect, nQuestions) {
+        var answersWord = nCorrect === 1 ? 'answer' : 'answers';
         return 'You got <span class="correct_answers">' + nCorrect + '</span> ' +
-               'correct answers out of ' + nQuestions + ' questions';
+               'correct ' + answersWord + ' out of ' + nQuestions + ' questions';
     }
 
     function make_default_how_you_did_htmls(nQuestions) {
@@ -17,10 +18,11 @@
         return ret;
     }
 
-    $.quiz = function(quiz_data, options) {
+    $.quiz = function(quiz_data, results_data, options) {
         var container_elem;
         var self;
         var cover;
+        var cheater_answer_tracking = [];
         var answer_tracking = [];
         var how_you_did_element;
 
@@ -28,6 +30,8 @@
             defaulting_behavior_on : true,
             defaulting_flag : '!default',
             container : 'quiz_container',
+            not_finished_html : undefined,
+            cheating : false,
             possible_display_elements  : [
                 { 
                     name : 'backgroundimage',
@@ -209,6 +213,7 @@
                 }
 
                 self.append_how_you_did_section();
+                self.update_how_you_did_element();
             },
             append_how_you_did_section: function() {
                 how_you_did_element = $('<p class="how_you_did"></p>');
@@ -376,8 +381,7 @@
                         if (!ret[index]) {
                             console.log("Invalid number of correct answers: " + index);
                         } else {
-                            var text = data[i].text;
-                            ret[index] = text;
+                            ret[index] = data[i].html;
                         }
                     }
                 }
@@ -423,14 +427,15 @@
                             );
 
                         //track how many you got right the first time
+                        cheater_answer_tracking[question_index] = was_correct;
                         if ( typeof(answer_tracking[question_index]) === 'undefined' ) {
                             answer_tracking[question_index] = was_correct;
-                            self.update_how_you_did_element();
                             cover.find('.question_' + question_index).addClass(
                                 'first_guess_' +
                                 (was_correct ? 'right' : 'wrong')
                             );
                         }
+                        self.update_how_you_did_element();
 
                         //show new slide
                         self.display_answer(self.quiz_data[question_index], question_index, self.quiz_data[question_index].possible_answers[answer_index]);
@@ -495,16 +500,26 @@
             },
             update_how_you_did_element: function() {
                 var right_answers = 0;
+                var user_answers = self.cheating ? cheater_answer_tracking : answer_tracking;
+                var unfinished = false;
                 for (var i = 0; i < self.quiz_data.length; i++) {
-                    if (answer_tracking[i]) {
+                    if (typeof(answer_tracking[i]) === 'undefined') {
+                        unfinished = true;
+                    }
+                    if (user_answers[i]) {
                         right_answers++;
                     }
                 }
-                var html = self.results_data[right_answers];
+                var html;
+                if (unfinished && typeof(this.not_finished_html) !== 'undefined') {
+                    html = this.not_finished_html;
+                } else {
+                    html = this.results_data[right_answers];
+                }
                 how_you_did_element.html(html);
             }
         };
-        return quiz.init(quiz_data, options);
+        return quiz.init(quiz_data, results_data, options);
     };
 
     $.fn.quiz = function(quiz_data, results_data, options) {
