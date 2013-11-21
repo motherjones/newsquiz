@@ -4,12 +4,25 @@
 /*global jQuery:false,Tabletop:false,console:false*/
 (function($) {
 
+    function make_default_how_you_did_html(nCorrect, nQuestions) {
+        return 'You got <span class="correct_answers">' + nCorrect + '</span> ' +
+               'correct answers out of ' + nQuestions + ' questions';
+    }
+
+    function make_default_how_you_did_htmls(nQuestions) {
+        var ret = [];
+        for (var i = 0; i <= nQuestions; i++) {
+            ret.push(make_default_how_you_did_html(i, nQuestions));
+        }
+        return ret;
+    }
+
     $.quiz = function(quiz_data, options) {
         var container_elem;
         var self;
         var cover;
         var answer_tracking = [];
-        var correct_answers_element;
+        var how_you_did_element;
 
         var quiz = {
             defaulting_behavior_on : true,
@@ -161,9 +174,9 @@
                 }
             ],
 
-            init : function(quiz_data, options) {
-
+            init : function(quiz_data, results_data, options) {
                 self = this;
+
                 if (options) {
                     for ( var option in options ) {
                         self[option] = options[option];
@@ -171,15 +184,24 @@
                 }
 
                 if (typeof(quiz_data) === 'string') {
-                    //is a google spreadsheet
-                    self.make_quiz_from_google_spreadsheet(quiz_data);
-                    return self;
+                    // is a google spreadsheet.
+                    // Will call init_data in a callback
+                    self.load_from_google_spreadsheet(quiz_data);
+                } else {
+                    if (!results_data) {
+                        results_data = make_default_how_you_did_htmls(quiz_data.length);
+                    }
+
+                    self.init_data(quiz_data, results_data);
                 }
 
-                self.calculate_aspectratios(quiz_data);
-
+                return self;
+            },
+            init_data: function(quiz_data, results_data) {
                 self.quiz_data = quiz_data;
-                    
+                self.results_data = results_data;
+
+                self.calculate_aspectratios(quiz_data);
                 self.create_cover();
 
                 for ( var i = 0; i < self.quiz_data.length; i++ ) {
@@ -187,27 +209,20 @@
                 }
 
                 self.append_how_you_did_section();
-
-                return self;
             },
             append_how_you_did_section: function() {
-                correct_answers_element = $('<span class="correct_answers">0</span>');
-                var how_you_did_element = $('<p class="how_you_did"></p>');
-                how_you_did_element.append($('<span>You got </span>'));
-                how_you_did_element.append(correct_answers_element);
-                how_you_did_element.append($('<span> correct answers out of ' + self.quiz_data.length + ' questions</span>'));
+                how_you_did_element = $('<p class="how_you_did"></p>');
                 cover.append(how_you_did_element);
-                cover.append($('<p class="small">on your first attempt. No fair changing your answers after you found out you were wrong</p>'));
             },
 
-            make_quiz_from_google_spreadsheet: function(spreadsheet_id) {
+            load_from_google_spreadsheet: function(spreadsheet_id) {
                 Tabletop.init({ 
                     key: spreadsheet_id,
                     callback: function(data) {
                         var quiz_data = self.make_quiz_data_from_spreadsheet_data(data);
-                        self.init(quiz_data, options);
-                    },
-                    simpleSheet: true
+                        var results_data = self.make_results_data_from_spreadsheet_data(data, quiz_data);
+                        self.init_data(quiz_data, results_data);
+                    }
                 });
             },
             calculate_aspectratios: function(data) {
@@ -295,10 +310,20 @@
                 }
                 return answer;
             },
-            make_quiz_data_from_spreadsheet_data: function(data) {
-                var j;
+            make_quiz_data_from_spreadsheet_data: function(tabletop) {
+                var i, j, sheetName, data;
                 var quiz = [];
-                for (var i = 0; i < data.length; i++) {
+
+                // Find a sheet that _isn't_ named "Results".
+                for (sheetName in tabletop) {
+                    if (tabletop.hasOwnProperty(sheetName) && sheetName !== 'Results') {
+                        break;
+                    }
+                }
+
+                data = tabletop[sheetName].elements;
+
+                for (i = 0; i < data.length; i++) {
                     var row = data[i];
                     var possible_wrong_answers = self.get_possible_answers(row, false);
                     var possible_right_answers = self.get_possible_answers(row, true);
@@ -339,6 +364,25 @@
                     quiz.push(question);
                 }
                 return quiz;
+            },
+            make_results_data_from_spreadsheet_data: function(tabletop, quiz_data) {
+                var ret = make_default_how_you_did_htmls(quiz_data.length);
+
+                var data = tabletop['Results'] ? tabletop['Results'].elements : [];
+                for (var i = 0; i < data.length; i++) {
+                    var index = data[i].numberofrightanswers;
+                    if (index) { index = parseInt(index, 10); }
+                    if (!isNaN(index)) {
+                        if (!ret[index]) {
+                            console.log("Invalid number of correct answers: " + index);
+                        } else {
+                            var text = data[i].text;
+                            ret[index] = text;
+                        }
+                    }
+                }
+
+                return ret;
             },
             append_question : function(question_index) {
                 var question_data = self.quiz_data[question_index];
@@ -381,7 +425,7 @@
                         //track how many you got right the first time
                         if ( typeof(answer_tracking[question_index]) === 'undefined' ) {
                             answer_tracking[question_index] = was_correct;
-                            self.update_correct_answers_element();
+                            self.update_how_you_did_element();
                             cover.find('.question_' + question_index).addClass(
                                 'first_guess_' +
                                 (was_correct ? 'right' : 'wrong')
@@ -449,23 +493,25 @@
                 container_elem.addClass('quiz_container');
                 container_elem.css('padding', '0px');
             },
-            update_correct_answers_element: function() {
+            update_how_you_did_element: function() {
                 var right_answers = 0;
                 for (var i = 0; i < self.quiz_data.length; i++) {
                     if (answer_tracking[i]) {
                         right_answers++;
                     }
                 }
-                correct_answers_element.text(right_answers);
+                var html = self.results_data[right_answers];
+                how_you_did_element.html(html);
             }
         };
         return quiz.init(quiz_data, options);
     };
 
-    $.fn.quiz = function(quiz_data, options) {
-        options = options || {};
+    $.fn.quiz = function(quiz_data, results_data, options) {
+        if (!options) { options = results_data; results_data = null; }
+        if (!options) { options = {}; }
         options.container = this.attr('id');
-        this.quiz = $.quiz(quiz_data, options);
+        this.quiz = $.quiz(quiz_data, results_data, options);
         return this;
     };
 })(jQuery);

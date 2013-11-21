@@ -128,7 +128,6 @@ var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url', {defaulting_
 
 ```
 
-
 ## Writing your quiz in JSON
 
 Writing your quiz in JSON is supported, though discouraged if you don't know JSON. The quiz object is formed like this:
@@ -167,6 +166,16 @@ Writing your quiz in JSON is supported, though discouraged if you don't know JSO
 ]
 ```
 You can pass that in as an argument instead of a Google Spreadsheet key, if you prefer.
+
+## Customizing the end-of-quiz message
+
+If you don't like the default result messages, you can change them. Create a second worksheet with the special name, `Results`. The first column should be `number of right answers` and the second should be `html`. Then add one row per potential number of correct answers: `0`, `1`, ... up to the total number of questions.
+
+If you're using JSON to set your quiz data, and you want to use custom results, then pass them as the second argument when you create your quiz. For instance:
+
+```javascript
+$("#my-element').quiz(quiz_data, [ 'all wrong', 'one right', 'two right', ... ], options);
+```
 
 ## Strange behavior
 
