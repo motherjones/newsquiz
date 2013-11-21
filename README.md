@@ -177,6 +177,14 @@ If you're using JSON to set your quiz data, and you want to use custom results, 
 $("#my-element').quiz(quiz_data, [ 'all wrong', 'one right', 'two right', ... ], options);
 ```
 
+## End-of-quiz message before the quiz is finished
+
+You may want to hide the end-of-quiz message until the user has completed it. Alternatively, you may want to show a prompt, such as "keep answering questions!".
+
+Use the option `not_finished_html`. That is, pass an options hash like: `{ not_finished_html: "" }`, or `{ not_finished_html: "keep answering questions!" }`.
+
+The default is `undefined`, which means the result messages will always be displayed.
+
 ## Strange behavior
 
 **Empty tables are trouble.** We can't get column names from them (c'mon, Google!), so don't be too confused when a table with 0 rows is coming back with an empty `.column_names` or your code starts throwing weird errors when processing the results.

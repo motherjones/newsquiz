@@ -9,8 +9,9 @@
 (function($) {
 
     function make_default_how_you_did_html(nCorrect, nQuestions) {
+        var answersWord = nCorrect == 1 ? 'answer' : 'answers';
         return 'You got <span class="correct_answers">' + nCorrect + '</span> ' +
-               'correct answers out of ' + nQuestions + ' questions';
+               'correct ' + answersWord + ' out of ' + nQuestions + ' questions';
     }
 
     function make_default_how_you_did_htmls(nQuestions) {
@@ -21,7 +22,7 @@
         return ret;
     }
 
-    $.quiz = function(quiz_data, options) {
+    $.quiz = function(quiz_data, results_data, options) {
         var container_elem;
         var self;
         var cover;
@@ -32,6 +33,7 @@
             defaulting_behavior_on : true,
             defaulting_flag : '!default',
             container : 'quiz_container',
+            not_finished_html : undefined,
             possible_display_elements  : [
                 { 
                     name : 'backgroundimage',
@@ -213,6 +215,7 @@
                 }
 
                 self.append_how_you_did_section();
+                self.update_how_you_did_element();
             },
             append_how_you_did_section: function() {
                 how_you_did_element = $('<p class="how_you_did"></p>');
@@ -499,16 +502,25 @@
             },
             update_how_you_did_element: function() {
                 var right_answers = 0;
+                var unfinished = false;
                 for (var i = 0; i < self.quiz_data.length; i++) {
+                    if (typeof(answer_tracking[i]) === 'undefined') {
+                        unfinished = true;
+                    }
                     if (answer_tracking[i]) {
                         right_answers++;
                     }
                 }
-                var html = self.results_data[right_answers];
+                var html;
+                if (unfinished && typeof(this.not_finished_html) !== 'undefined') {
+                    html = this.not_finished_html;
+                } else {
+                    html = this.results_data[right_answers];
+                }
                 how_you_did_element.html(html);
             }
         };
-        return quiz.init(quiz_data, options);
+        return quiz.init(quiz_data, results_data, options);
     };
 
     $.fn.quiz = function(quiz_data, results_data, options) {
