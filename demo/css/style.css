@@ -1,9 +1,8 @@
-
 .quiz_container {
     list-style-type: none !important;
-	font-weight: bold;
 	color: #21252E;
 	width: 98%;
+	font-weight: bold;
 }
 
 /*fluid grid layout using twitter bootstrap */
@@ -32,14 +31,22 @@
 	line-height: 1.5em;	
 }
 
+.quiz_container .question .hint {
+	font-weight: bold;
+}
+
 .quiz_container .question_container h1 {
-	font-size: 1.5em;
-    font-weight: bold;
+	font-size: 1.2em;
 	margin: 0em 0em 1em 0em;
 }
 
+.quiz_container .question_container .title {
+
+	font-weight: normal;
+}
+
 .quiz_container .question p {
-	font-size: 1.5em;
+	font-size: 1.1em;
 	max-height: 8em;
 }
 
