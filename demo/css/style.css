@@ -3,6 +3,7 @@
 	color: #21252E;
 	width: 98%;
 	font-weight: bold;
+	margin-left:20px;
 }
 
 /*fluid grid layout using twitter bootstrap */
@@ -11,13 +12,13 @@
 	margin-left: 0 !important;
 }
 
-.span12 {
+.col-12 {
 	padding: .75em;
 	margin-top: .75em;
 	margin-left: 0 !important;
 }
 
-.span12.question {
+.col-12.question {
 	padding: 0;
 }
 
@@ -50,7 +51,7 @@
 	max-height: 8em;
 }
 
-.quiz_container .possible_answers.span12 {
+.quiz_container .possible_answers.col-12 {
 	padding: 0;
 	margin: 0;
 }
