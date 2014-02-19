@@ -2,6 +2,9 @@
 
 ## Spreadsheet to quiz!
 
+###NOTE: This fork of [Mother Jones Newsquiz](https://github.com/motherjones/newsquiz) has been updated to Bootstrap v3. The demos linked below, currently use Bootstrap 2 styles.
+
+
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. Uses Tabletop, Bootstrap, jQuery, and Google Spreadsheets. It's easy! 
 
 The quiz looks like this:
