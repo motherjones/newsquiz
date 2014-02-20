@@ -128,7 +128,6 @@ var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url', {defaulting_
 
 ```
 
-
 ## Writing your quiz in JSON
 
 Writing your quiz in JSON is supported, though discouraged if you don't know JSON. The quiz object is formed like this:
@@ -167,6 +166,30 @@ Writing your quiz in JSON is supported, though discouraged if you don't know JSO
 ]
 ```
 You can pass that in as an argument instead of a Google Spreadsheet key, if you prefer.
+
+## Customizing the end-of-quiz message
+
+If you don't like the default result messages, you can change them. Create a second worksheet with the special name, `Results`. The first column should be `number of right answers` and the second should be `html`. Then add one row per potential number of correct answers: `0`, `1`, ... up to the total number of questions.
+
+If you're using JSON to set your quiz data, and you want to use custom results, then pass them as the second argument when you create your quiz. For instance:
+
+```javascript
+$("#my-element').quiz(quiz_data, [ 'all wrong', 'one right', 'two right', ... ], options);
+```
+
+## End-of-quiz message before the quiz is finished
+
+You may want to hide the end-of-quiz message until the user has completed it. Alternatively, you may want to show a prompt, such as "keep answering questions!".
+
+Use the option `not_finished_html`. That is, pass an options hash like: `{ not_finished_html: "" }`, or `{ not_finished_html: "keep answering questions!" }`.
+
+The default is `undefined`, which means the result messages will always be displayed.
+
+## Accommodating cheaters
+
+Some people like to cheat: they'll answer incorrectly and then change their minds.
+
+Befriend them with the option `cheating` (default `false`). When it's `true`, the end-of-quiz message will pretend their final answers were the ones they entered all along.
 
 ## Strange behavior
 
