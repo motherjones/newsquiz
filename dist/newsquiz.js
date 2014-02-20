@@ -160,7 +160,7 @@
             },
             build_question_element_from_row: function(row) {
                 var question = row.question;
-                return jQuery('<div class="question span12 show" '
+                return jQuery('<div class="question col-12 show" '
                     + ( question.backgroundimage 
                             ? 'style="background-image: url(\'' + question.backgroundimage + '\');">' 
                             : '>' )
@@ -190,7 +190,7 @@
                   answer = row.possible_answers[i];
                   revealed_answers_container.append(
                           jQuery('<div class="revealed_answer_' + i
-                              + ' revealed_answer span12 hide" '
+                              + ' revealed_answer col-12 hide" '
                               + ( answer.backgroundimage 
                                   ? 'style="background-image: url(\'' + answer.backgroundimage + '\');">' 
                                   : '>' )
@@ -218,11 +218,11 @@
               return revealed_answers_container;
             },
             build_possible_answer_elements_from_row : function(question, question_index) {
-                var answers_container = jQuery('<ul class="span12 possible_answers possible_answers_'
+                var answers_container = jQuery('<ul class="col-12 possible_answers possible_answers_'
                     + question_index + '"></ul>');
                 for (var i = 0; i < question.possible_answers.length; i++) {
                     var answer_data = question.possible_answers[i];
-                    var possible_answer = jQuery('<li class="possible_answer span12 answer_' 
+                    var possible_answer = jQuery('<li class="possible_answer col-12 answer_' 
                         + i
                         + '">'
                         + answer_data.answer

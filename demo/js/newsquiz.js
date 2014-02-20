@@ -1,6 +1,6 @@
-/*! newsquiz - v0.1.0 - 2013-11-21 
+/*! newsquiz - v0.1.0 - 2014-02-20 
 * https://github.com/motherjones/newsquiz
-* Copyright (c) 2013 Ben Breedlove; Licensed MIT, GPL */
+* Copyright (c) 2014 Ben Breedlove; Licensed MIT, GPL */
 /*global jQuery:false,Tabletop:false,console:false*/
 (function($) {
 
@@ -399,7 +399,7 @@
                 container_elem.append(question_container);
             },
             build_question_element_from_row: function(row) {
-                var question_container = $('<div class="question span12 show" style="overflow: hidden; position: relative;"></div>');
+                var question_container = $('<div class="question col-12 show" style="overflow: hidden; position: relative;"></div>');
                 for (var i = 0; i < self.possible_display_elements.length; i++) {
                     question_container.append(
                         self.possible_display_elements[i].create_element(row.question)
@@ -408,7 +408,7 @@
                 return question_container;
             },
             build_possible_answer_elements_from_row : function(question, question_index) {
-                var answers_container = $('<ul class="span12 possible_answers possible_answers_' +
+                var answers_container = $('<ul class="col-12 possible_answers possible_answers_' +
                     question_index + '"></ul>');
 
                 function bindClick(question_index, answer_index, possible_answer) {
@@ -447,7 +447,7 @@
 
                 for (var i = 0; i < question.possible_answers.length; i++) {
                     var answer_data = question.possible_answers[i];
-                    var possible_answer = $('<li class="possible_answer span12 answer_' +
+                    var possible_answer = $('<li class="possible_answer col-12 answer_' +
                         i +
                         '">' +
                         answer_data.answer +
