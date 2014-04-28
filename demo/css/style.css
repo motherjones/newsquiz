@@ -144,11 +144,11 @@
 }
 
 .quiz_container .possible_answer img {
-	max-height: 18em;
+	max-height: 24em;
 }
 
 .quiz_container .question img, .revealed_answer img, .selected img, .correct_answer img, .wrong_answer img {
-    max-height: 18em;
+    max-height: 24em;
     display: block;
 }
 
