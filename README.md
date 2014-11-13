@@ -197,7 +197,7 @@ Befriend them with the option `cheating` (default `false`). When it's `true`, th
 
 ## NewsQuiz.js in the wild
 
-Coming soon.
+[Le Temps](http://www.letemps.ch/interactive/2014/quiz-rosetta-comete/), Think You Know the Rosetta Mission?
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
