@@ -12,11 +12,11 @@ The quiz looks like this:
 
 ### Like how easy?
 
-    <div id="quiz_container"></div>
+    <div id="quiz"></div>
 
 	<script>
 		jQuery(function($) {
-	  		$('#quiz_container').quiz(YOUR_SPREADSHEET_KEY); //The hard part: writing the actual quiz.
+	  		$('#quiz').quiz(YOUR_SPREADSHEET_KEY); //The hard part: writing the actual quiz.
 		});
 	</script>
 	
@@ -54,9 +54,9 @@ Try the following, substituting your URL for `public_spreadsheet_url`
 			<link href="css/style.css" rel="stylesheet" media="screen">
 		</head>
 		<body>
-			<div id="quiz_container"></div>
+			<div id="quiz"></div>
 				<script type="text/javascript">
-					var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url');
+					var quiz = jQuery('#quiz').quiz('public_spreadsheet_url');
 				</script>
 		</body>
 		</html>
@@ -115,7 +115,7 @@ There are two ways to do it.
 1) To turn off defaulting for the entire quiz: In your project, add an options object as the second argument in your call to create the quiz. In the options argument, have the key `defaulting_behavior_on` set to `false`.
 
 ```
-var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url', {defaulting_behavior_on : false});
+var quiz = jQuery('#quiz').quiz('public_spreadsheet_url', {defaulting_behavior_on : false});
 
 ```
 
@@ -124,7 +124,7 @@ var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url', {defaulting_
 If you don't care for the term `!default`, you can change the flag like so:
 
 ```
-var quiz = jQuery('#quiz_container').quiz('public_spreadsheet_url', {defaulting_flag : 'REPLACE !DEFAULT HERE'});
+var quiz = jQuery('#quiz').quiz('public_spreadsheet_url', {defaulting_flag : 'REPLACE !DEFAULT HERE'});
 
 ```
 

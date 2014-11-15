@@ -8,10 +8,10 @@
         var container_elem;
         var that;
         var answer_tracking = [];
-        var correct_answers_element;
+        var correct-answers_element;
 
         var quiz = {
-            container : 'quiz_container',
+            container : 'quiz',
             init : function(quiz_data, options) {
 
                 that = this;
@@ -39,10 +39,10 @@
                 return that;
             },
             append_how_you_did_section: function() {
-                correct_answers_element = jQuery('<span class="correct_answers">0</span>');
+                correct-answers_element = jQuery('<span class="correct-answers">0</span>');
                 var how_you_did_element = jQuery('<p class="how_you_did"></p>');
                 how_you_did_element.append(jQuery('<span>You got </span>'));
-                how_you_did_element.append(correct_answers_element);
+                how_you_did_element.append(correct-answers_element);
                 how_you_did_element.append(jQuery('<span> correct answers out of ' + that.quiz_data.length + ' questions</span>'));
                 cover.append(how_you_did_element);
                 cover.append(jQuery('<p class="small">on your first attempt. No fair changing your answers after you found out you were wrong</p>'));
@@ -234,7 +234,7 @@
                             var was_correct = that.quiz_data[question_index].possible_answers[answer_index].correct;
                             if ( typeof(answer_tracking[question_index]) === 'undefined' ) {
                                 answer_tracking[question_index] = was_correct;
-                                that.update_correct_answers_element();
+                                that.update_correct-answers_element();
                                 cover.find('.question_' + question_index).addClass(
                                     'first_guess_'
                                     + ( was_correct
@@ -247,8 +247,8 @@
                                 .find('.answer_' + answer_index)
                                 .addClass( 
                                     was_correct
-                                        ? 'correct_answer'
-                                        : 'wrong_answer'
+                                        ? 'correct-answer'
+                                        : 'wrong-answer'
                                 );
                             that.display_answer(question_index, answer_index, was_correct);
                         });
@@ -276,17 +276,17 @@
                 cover = $('#' + that.container);
                 container_elem = jQuery('<ul></ul>');
                 cover.append(container_elem);
-                container_elem.addClass('quiz_container');
+                container_elem.addClass('quiz');
                 container_elem.css('padding', '0px');
             },
-            update_correct_answers_element: function() {
+            update_correct-answers_element: function() {
                 var right_answers = 0;
                 for (var i = 0; i < that.quiz_data.length; i++) {
                     if (answer_tracking[i]) {
                         right_answers++;
                     }
                 }
-                correct_answers_element.text(right_answers);
+                correct-answers_element.text(right_answers);
             }
         };
         return quiz.init(quiz_data, options);

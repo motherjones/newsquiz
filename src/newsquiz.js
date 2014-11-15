@@ -8,16 +8,16 @@
 /*global jQuery:false,Tabletop:false,console:false*/
 (function($) {
 
-    function make_default_how_you_did_html(nCorrect, nQuestions) {
+    function score(nCorrect, nQuestions) {
         var answersWord = nCorrect === 1 ? 'answer' : 'answers';
-        return 'You got <span class="correct_answers">' + nCorrect + '</span> ' +
+        return 'You got <span class="correct-answers">' + nCorrect + '</span> ' +
                'correct ' + answersWord + ' out of ' + nQuestions + ' questions';
     }
 
-    function make_default_how_you_did_htmls(nQuestions) {
+    function scores(nQuestions) {
         var ret = [];
         for (var i = 0; i <= nQuestions; i++) {
-            ret.push(make_default_how_you_did_html(i, nQuestions));
+            ret.push(score(i, nQuestions));
         }
         return ret;
     }
@@ -33,7 +33,7 @@
         var quiz = {
             defaulting_behavior_on : true,
             defaulting_flag : '!default',
-            container : 'quiz_container',
+            container : 'quiz',
             not_finished_html : undefined,
             cheating : false,
             possible_display_elements  : [
@@ -197,7 +197,7 @@
                     self.load_from_google_spreadsheet(quiz_data);
                 } else {
                     if (!results_data) {
-                        results_data = make_default_how_you_did_htmls(quiz_data.length);
+                        results_data = scores(quiz_data.length);
                     }
 
                     self.init_data(quiz_data, results_data);
@@ -375,7 +375,7 @@
                 return quiz;
             },
             make_results_data_from_spreadsheet_data: function(tabletop, quiz_data) {
-                var ret = make_default_how_you_did_htmls(quiz_data.length);
+                var ret = scores(quiz_data.length);
 
                 var data = tabletop['Results'] ? tabletop['Results'].elements : [];
                 for (var i = 0; i < data.length; i++) {
@@ -427,7 +427,7 @@
                         answers_container
                             .find('.answer_' + answer_index)
                             .addClass( 
-                                was_correct ? 'correct_answer' : 'wrong_answer'
+                                was_correct ? 'correct-answer' : 'wrong-answer'
                             );
 
                         //track how many you got right the first time
@@ -499,7 +499,7 @@
                 cover = $('#' + self.container);
                 container_elem = $('<ul></ul>');
                 cover.append(container_elem);
-                container_elem.addClass('quiz_container');
+                container_elem.addClass('quiz');
                 container_elem.css('padding', '0px');
             },
             update_how_you_did_element: function() {

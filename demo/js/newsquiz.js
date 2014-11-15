@@ -1,19 +1,16 @@
-/*! newsquiz - v0.1.0 - 2014-02-20 
-* https://github.com/motherjones/newsquiz
-* Copyright (c) 2014 Ben Breedlove; Licensed MIT, GPL */
-/*global jQuery:false,Tabletop:false,console:false*/
+
 (function($) {
 
-    function make_default_how_you_did_html(nCorrect, nQuestions) {
+    function score (nCorrect, nQuestions) {
         var answersWord = nCorrect === 1 ? 'answer' : 'answers';
-        return 'You got <span class="correct_answers">' + nCorrect + '</span> ' +
+        return 'You got <span class="correct-answers">' + nCorrect + '</span> ' +
                'correct ' + answersWord + ' out of ' + nQuestions + ' questions';
     }
 
-    function make_default_how_you_did_htmls(nQuestions) {
+    function scores(nQuestions) {
         var ret = [];
         for (var i = 0; i <= nQuestions; i++) {
-            ret.push(make_default_how_you_did_html(i, nQuestions));
+            ret.push(score(i, nQuestions));
         }
         return ret;
     }
@@ -29,7 +26,7 @@
         var quiz = {
             defaulting_behavior_on : true,
             defaulting_flag : '!default',
-            container : 'quiz_container',
+            container : 'quiz',
             not_finished_html : undefined,
             cheating : false,
             possible_display_elements  : [
@@ -57,7 +54,7 @@
                         if (!slide[this.name]) {return '';}
                         return $(
                                 '<img src="' + slide[this.name]  +
-                                '" class="' + this.name + '"></img>' 
+                                '" class="img-responsive' + this.name + '"></img>' 
                         );
                     } 
                 },
@@ -84,8 +81,8 @@
                     },
                     create_element : function(slide) {
                         if (!slide[this.name]) {return '';}
-                        return $('<h1 class="' + this.name + '">' +
-                            slide[this.name] + '</h1>' 
+                        return $('<h3 class="' + this.name + '">' +
+                            slide[this.name] + '</h3>' 
                         );
                     } 
                 },
@@ -98,7 +95,7 @@
                         if (!slide[this.name]) {return '';}
                         return $(
                                 '<img src="' + slide[this.name] +
-                                '" class="' + this.name + '"></img>' 
+                                '" class="img-responsive ' + this.name + '"></img>' 
                         );
                     } 
                 },
@@ -156,7 +153,7 @@
                     create_element : function(slide) {
                         if (!slide[this.name]) {return '';}
                         return $('<img src="' + slide[this.name] +
-                            '" class="' + this.name + '"></img>' 
+                            '" class="img-responsive ' + this.name + '"></img>' 
                         );
                     } 
                 },
@@ -193,7 +190,7 @@
                     self.load_from_google_spreadsheet(quiz_data);
                 } else {
                     if (!results_data) {
-                        results_data = make_default_how_you_did_htmls(quiz_data.length);
+                        results_data = scores(quiz_data.length);
                     }
 
                     self.init_data(quiz_data, results_data);
@@ -371,7 +368,7 @@
                 return quiz;
             },
             make_results_data_from_spreadsheet_data: function(tabletop, quiz_data) {
-                var ret = make_default_how_you_did_htmls(quiz_data.length);
+                var ret = scores(quiz_data.length);
 
                 var data = tabletop['Results'] ? tabletop['Results'].elements : [];
                 for (var i = 0; i < data.length; i++) {
@@ -399,7 +396,7 @@
                 container_elem.append(question_container);
             },
             build_question_element_from_row: function(row) {
-                var question_container = $('<div class="question col-12 show" style="overflow: hidden; position: relative;"></div>');
+                var question_container = $('<div class="question show" style="overflow: hidden; position: relative;"></div>');
                 for (var i = 0; i < self.possible_display_elements.length; i++) {
                     question_container.append(
                         self.possible_display_elements[i].create_element(row.question)
@@ -408,7 +405,7 @@
                 return question_container;
             },
             build_possible_answer_elements_from_row : function(question, question_index) {
-                var answers_container = $('<ul class="col-12 possible_answers possible_answers_' +
+                var answers_container = $('<ul class="list-unstyled possible_answers possible_answers_' +
                     question_index + '"></ul>');
 
                 function bindClick(question_index, answer_index, possible_answer) {
@@ -423,7 +420,7 @@
                         answers_container
                             .find('.answer_' + answer_index)
                             .addClass( 
-                                was_correct ? 'correct_answer' : 'wrong_answer'
+                                was_correct ? 'correct-answer' : 'wrong-answer'
                             );
 
                         //track how many you got right the first time
@@ -447,11 +444,11 @@
 
                 for (var i = 0; i < question.possible_answers.length; i++) {
                     var answer_data = question.possible_answers[i];
-                    var possible_answer = $('<li class="possible_answer col-12 answer_' +
+                    var possible_answer = $('<li><p class="bg-warning possible_answer answer_' +
                         i +
                         '">' +
                         answer_data.answer +
-                        '</li>');
+                        '</p></li>');
                     bindClick(question_index, i, possible_answer);
                     answers_container.append(possible_answer);
                 }
@@ -495,7 +492,7 @@
                 cover = $('#' + self.container);
                 container_elem = $('<ul></ul>');
                 cover.append(container_elem);
-                container_elem.addClass('quiz_container');
+                container_elem.addClass('quiz');
                 container_elem.css('padding', '0px');
             },
             update_how_you_did_element: function() {
