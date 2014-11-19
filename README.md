@@ -1,20 +1,36 @@
-# **NewsQuiz.js** 
+# **NewsQuiz.js** - Make quizzes using Google Spreadsheets
 
-## Spreadsheet to quiz!
 Sample screenshot
 <p align="center">
-  <img src="" alt="screenshot"/>
+  <img src="https://github.com/motherjones/newsquiz/blob/master/img/Screen%20Shot%202014-11-19%20at%2012.54.24%20PM.png" alt="screenshot"/>
 </p>
 
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. Uses Tabletop, Bootstrap, jQuery, and Google Spreadsheets. It's easy! 
 
-The quiz looks like this:
+## Examples in the wild
 
 [Basic Demo](http://motherjones.github.com/newsquiz/index-basic.html)
 
 [Advanced Demo](http://motherjones.github.com/newsquiz/index-advanced.html)
 
-### Like how easy?
+[Which Bundy Said It: Cliven, Al, Ted, or McGeorge?] (http://www.motherjones.com/politics/2014/04/cliven-bundy-quotes-quiz)
+
+[Quiz: Who's More Metal, the Cat or the Owner?] (http://www.motherjones.com/mixed-media/2014/04/quiz-whos-more-metal-cats-or-their-owners)
+
+[Quiz: Match the Political Scandal to the Apology] (http://www.motherjones.com/politics/2014/01/quiz-match-political-scandal-apology)
+
+### How it works
+
+*MoJo staffers:* get started by following [these instructions](https://github.com/motherjones/story-tools#starting-a-new-project).
+
+This tool offers a simple way to create quizzes using only a little bit of code and a Google spreadsheet. The quizzes work well with text and photos, and you can embed source links at your pleasure. Also works well on mobile. Let's get started. 
+
+-----CUT ALL THIS?----
+You're also going to need this bit of Javascript: 
+
+And CSS: 
+
+(PUT IN NEW HTML, CSS, JS?)
 
     <div id="quiz"></div>
 
@@ -23,16 +39,17 @@ The quiz looks like this:
 	  		$('#quiz').quiz(YOUR_SPREADSHEET_KEY); //The hard part: writing the actual quiz.
 		});
 	</script>
-	
-The hard part: writing the actual quiz.
+-----CUT TO HERE?------
 
-# Getting Started: Make a Really Basic Quiz
+# Here's what you need to do
 
 ### 1) Set up a Google Spreadsheet
 
 Start a new Google Spreadsheet with the following column headers:
 
     question title	question text	right	right text	wrong	wrong text
+    
+*MoJo staffers:* Make sure you move the spreadsheet the relevant beat folder in the Mother Jones Google Drive. Rename the spreadsheet appropriately. Change owner to MoJo Data in ``Share > Advanced``
     
 (Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that [later](https://github.com/motherjones/newsquiz#advanced-quiz)).
 
@@ -44,7 +61,8 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 
 [Demo spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
-### 2) Set up your index.html page
+### 2) Set up your index.html page (this is what goes in the sourcecode view in your CMS):
+NEW HTML FROM BUNDY???
 
 Try the following, substituting your URL for `public_spreadsheet_url`
 
@@ -198,10 +216,6 @@ Befriend them with the option `cheating` (default `false`). When it's `true`, th
 ## Strange behavior
 
 **Empty tables are trouble.** We can't get column names from them (c'mon, Google!), so don't be too confused when a table with 0 rows is coming back with an empty `.column_names` or your code starts throwing weird errors when processing the results.
-
-## NewsQuiz.js in the wild
-
-[Le Temps](http://www.letemps.ch/interactive/2014/quiz-rosetta-comete/), Think You Know the Rosetta Mission?
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
