@@ -3,7 +3,7 @@
 ## Spreadsheet to quiz!
 Sample screenshot
 <p align="center">
-  <img src="" alt="screenshot"/>
+  <img src="https://github.com/motherjones/newsquiz/blob/master/img/Screen%20Shot%202014-11-19%20at%2012.54.24%20PM.png" alt="screenshot"/>
 </p>
 
 **NewsQuiz.js** turns data from a Google Spreadsheet into a nice quiz, with lots of flexible options and a fluid layout. Uses Tabletop, Bootstrap, jQuery, and Google Spreadsheets. It's easy! 
