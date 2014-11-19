@@ -23,8 +23,9 @@ Sample screenshot
 
 *MoJo staffers:* get started by following [these instructions](https://github.com/motherjones/story-tools#starting-a-new-project).
 
-This tool offers a simple way to create quizzes using only a little bit of code and a Google spreadsheet. It's pretty simple. Whip this HTML up (usually can go in the source code view in your CMS): 
+This tool offers a simple way to create quizzes using only a little bit of code and a Google spreadsheet. The quizzes work well with text and photos, and you can embed source links at your pleasure. Also works well on mobile. Let's get started. 
 
+-----CUT ALL THIS?----
 You're also going to need this bit of Javascript: 
 
 And CSS: 
@@ -38,8 +39,7 @@ And CSS:
 	  		$('#quiz').quiz(YOUR_SPREADSHEET_KEY); //The hard part: writing the actual quiz.
 		});
 	</script>
-	
-The hard part: writing the actual quiz.
+-----CUT TO HERE?------
 
 # Here's what you need to do
 
@@ -61,7 +61,8 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 
 [Demo spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
-### 2) Set up your index.html page
+### 2) Set up your index.html page (this is what goes in the sourcecode view in your CMS):
+NEW HTML FROM BUNDY???
 
 Try the following, substituting your URL for `public_spreadsheet_url`
 
