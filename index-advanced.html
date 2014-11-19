@@ -1,0 +1,22 @@
+<html>
+<head>
+    <script src="js/jquery.js"></script>
+    <script src="js/tabletop.js"></script>
+	<script src="js/newsquiz.min.js"></script>
+
+<!-- bootstrap.min.css is the barebones; bootstrap-responsive.css makes the quiz device-friendly -->            
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+    
+<!-- Custom stylesheet. Use this or create your own -->
+	<link href="css/style.css" rel="stylesheet" media="screen">
+</head>
+    <body>
+	
+<!-- tabletop.js renders your spreadsheet data as HTML. Simply add a div below to wrap the whole thing -->
+        <div id="quiz"></div>
+        <script type="text/javascript">
+                var quiz = jQuery('#quiz').quiz('0AuHOPshyxQGGdFM5ZWR6ajdzQ1Y5dFFZand1eS1MYmc'); //your published spreadsheet key or URL goes here
+        </script>
+    </body>
+</html>
