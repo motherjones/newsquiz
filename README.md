@@ -20,7 +20,7 @@ Sample screenshot
 
 [Quiz: Match the Political Scandal to the Apology] (http://www.motherjones.com/politics/2014/01/quiz-match-political-scandal-apology)
 
-### Like how easy?
+### How it works
 
     <div id="quiz"></div>
 
