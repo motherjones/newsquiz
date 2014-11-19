@@ -14,6 +14,10 @@ Sample screenshot
 
 [Advanced Demo](http://motherjones.github.com/newsquiz/index-advanced.html)
 
+[Which Bundy Said It: Cliven, Al, Ted, or McGeorge?] (http://www.motherjones.com/politics/2014/04/cliven-bundy-quotes-quiz)
+
+[Quiz: Who's More Metal, the Cat or the Owner?] (http://www.motherjones.com/mixed-media/2014/04/quiz-whos-more-metal-cats-or-their-owners)
+
 ### Like how easy?
 
     <div id="quiz"></div>
