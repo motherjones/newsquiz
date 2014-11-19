@@ -21,6 +21,8 @@ Sample screenshot
 
 ### How it works
 
+*MoJo staffers:* get started by following [these instructions](https://github.com/motherjones/story-tools#starting-a-new-project).
+
     <div id="quiz"></div>
 
 	<script>
