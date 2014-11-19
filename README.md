@@ -18,6 +18,8 @@ Sample screenshot
 
 [Quiz: Who's More Metal, the Cat or the Owner?] (http://www.motherjones.com/mixed-media/2014/04/quiz-whos-more-metal-cats-or-their-owners)
 
+[Quiz: Match the Political Scandal to the Apology] (http://www.motherjones.com/politics/2014/01/quiz-match-political-scandal-apology)
+
 ### Like how easy?
 
     <div id="quiz"></div>
