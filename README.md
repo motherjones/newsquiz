@@ -23,6 +23,8 @@ Sample screenshot
 
 *MoJo staffers:* get started by following [these instructions](https://github.com/motherjones/story-tools#starting-a-new-project).
 
+This tool offers a simple way to create quizzes using only a little bit of code and a Google spreadsheet.
+
     <div id="quiz"></div>
 
 	<script>
