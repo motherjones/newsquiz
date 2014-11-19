@@ -1,6 +1,5 @@
-# **NewsQuiz.js** 
+# **NewsQuiz.js** - Make simple quizzes using Google Spreadsheets
 
-## Spreadsheet to quiz!
 Sample screenshot
 <p align="center">
   <img src="https://github.com/motherjones/newsquiz/blob/master/img/Screen%20Shot%202014-11-19%20at%2012.54.24%20PM.png" alt="screenshot"/>
