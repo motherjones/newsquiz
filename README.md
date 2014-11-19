@@ -23,7 +23,13 @@ Sample screenshot
 
 *MoJo staffers:* get started by following [these instructions](https://github.com/motherjones/story-tools#starting-a-new-project).
 
-This tool offers a simple way to create quizzes using only a little bit of code and a Google spreadsheet.
+This tool offers a simple way to create quizzes using only a little bit of code and a Google spreadsheet. It's pretty simple. Whip this HTML up (usually can go in the source code view in your CMS): 
+
+You're also going to need this bit of Javascript: 
+
+And CSS: 
+
+(PUT IN NEW HTML, CSS, JS?)
 
     <div id="quiz"></div>
 
