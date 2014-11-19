@@ -41,13 +41,15 @@ And CSS:
 	
 The hard part: writing the actual quiz.
 
-# Getting Started: Make a Really Basic Quiz
+# Here's what you need to do
 
 ### 1) Set up a Google Spreadsheet
 
 Start a new Google Spreadsheet with the following column headers:
 
     question title	question text	right	right text	wrong	wrong text
+    
+*MoJo staffers:* Make sure you move the spreadsheet the relevant beat folder in the Mother Jones Google Drive. Rename the spreadsheet appropriately. Change owner to MoJo Data in ``Share > Advanced``
     
 (Don't sweat if you want to include extra goodies like images, videos, or additional titles—we'll get to that [later](https://github.com/motherjones/newsquiz#advanced-quiz)).
 
