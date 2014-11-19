@@ -205,10 +205,6 @@ Befriend them with the option `cheating` (default `false`). When it's `true`, th
 
 **Empty tables are trouble.** We can't get column names from them (c'mon, Google!), so don't be too confused when a table with 0 rows is coming back with an empty `.column_names` or your code starts throwing weird errors when processing the results.
 
-## NewsQuiz.js in the wild
-
-[Le Temps](http://www.letemps.ch/interactive/2014/quiz-rosetta-comete/), Think You Know the Rosetta Mission?
-
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt](https://github.com/cowboy/grunt).
 
