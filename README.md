@@ -1,4 +1,4 @@
-# **NewsQuiz.js** - Make simple quizzes using Google Spreadsheets
+# **NewsQuiz.js** - Make quizzes using Google Spreadsheets
 
 Sample screenshot
 <p align="center">
