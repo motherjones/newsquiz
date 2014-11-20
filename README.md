@@ -47,7 +47,7 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 
 Try the following (don't forget to grab your spreadsheet key):
 
-<!DOCTYPE html>
+```<!DOCTYPE html>
 <html>
     <head>
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen" type="text/css">
@@ -68,7 +68,7 @@ Try the following (don't forget to grab your spreadsheet key):
             </script>
 
     </body>
-</html>``
+</html>```
 
 
 Load your index.html page in a browser, and check it out! **Pretty rad!** 
