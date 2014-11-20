@@ -1,4 +1,4 @@
-# **NewsQuiz.js** - Make quizzes using Google Spreadsheets
+## **NewsQuiz.js** - Make quizzes using Google Spreadsheets
 
 Sample screenshot
 <p align="center">
@@ -25,7 +25,7 @@ Sample screenshot
 
 This tool offers a simple way to create quizzes using only a little bit of code and a Google spreadsheet. The quizzes work well with text and photos, and you can embed source links at your pleasure. Also works well on mobile. Let's get started. 
 
-### 1) Set up a Google Spreadsheet
+### Set up a Google Spreadsheet
 
 Start a new Google Spreadsheet with the following column headers:
 
@@ -43,9 +43,9 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 
 [Demo spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
-### 2) Set up your index.html page (this is the html page that has to go up on S3):
+### Modify your project files (required)
 
-Try the following (don't forget to grab your spreadsheet key):
+Set up your index.html page (this is the html page that has to go up on S3). Use the following (don't forget to grab your spreadsheet key):
 
 ```html
 <!DOCTYPE html>
@@ -65,7 +65,7 @@ Try the following (don't forget to grab your spreadsheet key):
             <script src="js/script.js" type="text/javascript"></script>
             
             <script type="text/javascript">
-                var quiz = jQuery('#quiz').quiz('your spreadsheet key goes here'); //your published spreadsheet key or URL goes here
+                var quiz = jQuery('#quiz').quiz('YOUR SPREADSHEET KEY GOES HERE'); //your published spreadsheet key or URL goes here
             </script>
 
     </body>
