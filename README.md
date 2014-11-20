@@ -43,7 +43,7 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 
 [Demo spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
-### 2) Set up your index.html page (this is what goes in the sourcecode view in your CMS):
+### 2) Set up your index.html page (this is the html page that has to go up on S3):
 
 Try the following (don't forget to grab your spreadsheet key):
 
@@ -72,8 +72,15 @@ Try the following (don't forget to grab your spreadsheet key):
 </html>
 ```
 
+After you get your index.html page on S3 and get the distribution URL, you'll use this code in the Source view of your CMS:
 
-Load your index.html page in a browser, and check it out! **Pretty rad!** 
+```html
+  <div id="graphic"></div>
+  <script type="text/javascript" src="http://assets.motherjones.com/interactives/plugins/pym.js/src/pym.js"></script>
+  <script>
+        var pymParent = new pym.Parent('graphic', 'distribution URL here', {});
+  </script>
+  ```
 
 # Advanced Quiz
 ## Let's get fancy.
