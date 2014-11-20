@@ -47,23 +47,29 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 NEW HTML FROM BUNDY???
 
 Try the following, substituting your URL for `public_spreadsheet_url`
+`<!DOCTYPE html>
+<html>
+    <head>
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen" type="text/css">
+        <link href="css/style.css" rel="stylesheet" media="screen" type="text/css">
+        <title></title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div id="quiz"></div>
+        </div>
 
-		<html>
-		<head>
-			<script src="js/jquery.js"></script>
-			<script src="js/tabletop.js"></script>
-			<script src="js/newsquiz.min.js"></script>      
-			<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-			<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
-			<link href="css/style.css" rel="stylesheet" media="screen">
-		</head>
-		<body>
-			<div id="quiz"></div>
-				<script type="text/javascript">
-					var quiz = jQuery('#quiz').quiz('public_spreadsheet_url');
-				</script>
-		</body>
-		</html>
+            <script src="js/jquery.js" type="text/javascript"></script>
+            <script src="js/tabletop.js" type="text/javascript"></script>
+            <script src="js/script.js" type="text/javascript"></script>
+            
+            <script type="text/javascript">
+                var quiz = jQuery('#quiz').quiz('0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc'); //your published spreadsheet key or URL goes here
+            </script>
+
+    </body>
+</html>`
+
 
 Load your index.html page in a browser, and check it out! **Pretty rad!** 
 
