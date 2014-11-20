@@ -25,24 +25,6 @@ Sample screenshot
 
 This tool offers a simple way to create quizzes using only a little bit of code and a Google spreadsheet. The quizzes work well with text and photos, and you can embed source links at your pleasure. Also works well on mobile. Let's get started. 
 
------CUT ALL THIS?----
-You're also going to need this bit of Javascript: 
-
-And CSS: 
-
-(PUT IN NEW HTML, CSS, JS?)
-
-    <div id="quiz"></div>
-
-	<script>
-		jQuery(function($) {
-	  		$('#quiz').quiz(YOUR_SPREADSHEET_KEY); //The hard part: writing the actual quiz.
-		});
-	</script>
------CUT TO HERE?------
-
-# Here's what you need to do
-
 ### 1) Set up a Google Spreadsheet
 
 Start a new Google Spreadsheet with the following column headers:
