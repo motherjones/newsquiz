@@ -204,13 +204,3 @@ You may want to hide the end-of-quiz message until the user has completed it. Al
 Use the option `not_finished_html`. That is, pass an options hash like: `{ not_finished_html: "" }`, or `{ not_finished_html: "keep answering questions!" }`.
 
 The default is `undefined`, which means the result messages will always be displayed.
-
-## Accommodating cheaters
-
-Some people like to cheat: they'll answer incorrectly and then change their minds.
-
-Befriend them with the option `cheating` (default `false`). When it's `true`, the end-of-quiz message will pretend their final answers were the ones they entered all along.
-
-## Strange behavior
-
-**Empty tables are trouble.** We can't get column names from them (c'mon, Google!), so don't be too confused when a table with 0 rows is coming back with an empty `.column_names` or your code starts throwing weird errors when processing the results.
