@@ -44,10 +44,10 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 [Demo spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc#gid=0)
 
 ### 2) Set up your index.html page (this is what goes in the sourcecode view in your CMS):
-NEW HTML FROM BUNDY???
 
 Try the following, substituting your URL for `public_spreadsheet_url`
-`<!DOCTYPE html>
+
+``<!DOCTYPE html>
 <html>
     <head>
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen" type="text/css">
@@ -68,7 +68,7 @@ Try the following, substituting your URL for `public_spreadsheet_url`
             </script>
 
     </body>
-</html>`
+</html>``
 
 
 Load your index.html page in a browser, and check it out! **Pretty rad!** 
