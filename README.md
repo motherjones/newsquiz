@@ -81,7 +81,7 @@ After you get your index.html page on S3 and get the distribution URL, you'll us
         var pymParent = new pym.Parent('graphic', 'distribution URL here', {});
   </script>
   ```
-If you've followed the setup correctly, that should be all you need!
+If you've [followed the setup correctly](https://github.com/motherjones/story-tools#starting-a-new-project), that should be all you need!
 
 # Advanced Quiz
 ## Let's get fancy.
