@@ -45,9 +45,9 @@ Copy that! In theory you're interested in the part between `key=` and `&` but yo
 
 ### 2) Set up your index.html page (this is what goes in the sourcecode view in your CMS):
 
-Try the following, substituting your URL for `public_spreadsheet_url`
+Try the following (don't forget to grab your spreadsheet key):
 
-``<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen" type="text/css">
@@ -64,7 +64,7 @@ Try the following, substituting your URL for `public_spreadsheet_url`
             <script src="js/script.js" type="text/javascript"></script>
             
             <script type="text/javascript">
-                var quiz = jQuery('#quiz').quiz('0Arenb9rAosmbdG5GWHFXbWJlN1hTR2ZmN3lZMVZkOHc'); //your published spreadsheet key or URL goes here
+                var quiz = jQuery('#quiz').quiz('your spreadsheet key goes here'); //your published spreadsheet key or URL goes here
             </script>
 
     </body>
