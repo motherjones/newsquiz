@@ -219,7 +219,9 @@
 
             load_from_google_spreadsheet: function(spreadsheet_id) {
                 Tabletop.init({ 
+                    proxy: this.proxy ? this.proxy : undefined,
                     key: spreadsheet_id,
+                    prettyColumnNames: false,
                     callback: function(data) {
                         var quiz_data = self.make_quiz_data_from_spreadsheet_data(data);
                         var results_data = self.make_results_data_from_spreadsheet_data(data, quiz_data);
