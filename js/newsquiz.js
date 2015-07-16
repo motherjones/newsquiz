@@ -51,6 +51,7 @@
             make_quiz_from_google_spreadsheet: function(spreadsheet_id) {
                 Tabletop.init({ 
                     key: spreadsheet_id,
+                    prettyColumnNames: false,
                     callback: function(data) {
                         var quiz_data = that.make_quiz_data_from_spreadsheet_data(data);
                         that.init(quiz_data, options);
