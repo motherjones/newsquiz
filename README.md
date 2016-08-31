@@ -194,7 +194,7 @@ If you don't like the default result messages, you can change them. Create a sec
 If you're using JSON to set your quiz data, and you want to use custom results, then pass them as the second argument when you create your quiz. For instance:
 
 ```javascript
-$("#my-element').quiz(quiz_data, [ 'all wrong', 'one right', 'two right', ... ], options);
+$('#my-element').quiz(quiz_data, [ 'all wrong', 'one right', 'two right', ... ], options);
 ```
 
 ## End-of-quiz message before the quiz is finished
